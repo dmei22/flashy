@@ -5,8 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DeckOverviewDto {
-    private Long id;
+public class DeckCreateRequest {
     private String name;
     private String description;
 }

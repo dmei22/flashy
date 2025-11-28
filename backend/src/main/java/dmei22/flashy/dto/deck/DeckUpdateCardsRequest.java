@@ -1,10 +1,12 @@
 package dmei22.flashy.dto.deck;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 public class DeckUpdateCardsRequest {
     public Long deckId;
     public Set<Long> cardIds;

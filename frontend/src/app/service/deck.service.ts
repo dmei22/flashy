@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {DeckCreateRequest, DeckDetails, DeckOverview} from "../model/Deck";
+import {DeckCreateRequest, DeckDetails, DeckOverview, DeckUpdateRequest} from "../model/Deck";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class DeckService {
   constructor() { }
 
   // CREATE
-  public createDeck(request: DeckCreateRequest): Observable<DeckOverview> {
+  public create(request: DeckCreateRequest): Observable<DeckOverview> {
     return this.http.post<DeckOverview>(`${this.baseUrl}/deck/create`, request);
   }
 
@@ -28,7 +28,9 @@ export class DeckService {
   }
 
   // UPDATE
-
+  public update(request: DeckUpdateRequest): Observable<DeckDetails> {
+      return this.http.put<DeckDetails>(`${this.baseUrl}/deck/update`, request);
+  }
 
   // DELETE
   public deleteById(id: number): Observable<void> {

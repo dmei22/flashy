@@ -5,9 +5,16 @@
 			<div class="card-body">
 				<h1 class="card-title">{{ deck()?.name }}</h1>
 				<p class="card-text">{{ deck()?.description }}</p>
+				<button type="button"
+						class="btn btn-warning"
+						data-bs-toggle="modal"
+						data-bs-target="#deck-edit-modal"
+				>Edit Deck</button>
+
 				<button class="btn btn-danger"
 						type="button"
-						(click)="onDelete()">Delete</button>
+						(click)="onDelete()"
+				>Delete</button>
 			</div>
 		</div>
 	</div>
@@ -19,3 +26,49 @@
 		</div>
 	</div>
 </div>
+
+<!--Deck edit modal-->
+<div class="modal fade" id="deck-edit-modal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title">Deck Creation</h1>
+				<button type="button"
+						class="btn-close"
+						data-bs-dismiss="modal"
+						id="deck-edit-modal-close"
+				></button>
+			</div>
+			<div class="modal-body">
+				<div [formGroup]="deckEditForm">
+					<input formControlName="id" hidden>
+					<div>
+						<label class="form-label">Name</label>
+						<input class="form-control"
+							   type="text"
+							   formControlName="name"
+						>
+					</div>
+
+					<div>
+						<label class="form-label">Description</label>
+						<textarea class="form-control"
+								  type="text"
+								  rows="3"
+								  formControlName="description"
+						></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary"
+						type="button"
+						(click)="onEdit()"
+				>
+					Save changes
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+

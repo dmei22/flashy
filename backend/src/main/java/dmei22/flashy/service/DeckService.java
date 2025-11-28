@@ -1,8 +1,6 @@
 package dmei22.flashy.service;
 
-import dmei22.flashy.dto.deck.DeckDetailsDto;
-import dmei22.flashy.dto.deck.DeckOverviewDto;
-import dmei22.flashy.dto.deck.DeckUpdateCardsRequest;
+import dmei22.flashy.dto.deck.*;
 import dmei22.flashy.model.Card;
 import dmei22.flashy.model.Deck;
 import dmei22.flashy.repository.CardRepository;
@@ -26,8 +24,12 @@ public class DeckService {
     }
 
     // CREATE
-    public Deck create(Deck card) {
-        return this.deckRepository.save(card);
+    public DeckOverviewDto create(DeckCreateRequest request) {
+        Deck deck = new Deck();
+        deck.setName(request.getName());
+        deck.setDescription(request.getDescription());
+
+        return DeckMapper.toDeckOverviewDto(this.deckRepository.save(deck));
     }
 
     // READ
@@ -46,11 +48,15 @@ public class DeckService {
     }
 
     // UPDATE
-    public Deck update(Deck deck) {
-        return this.deckRepository.save(deck);
+    public DeckDetailsDto update(DeckUpdateRequest request) {
+        Deck deck = this.deckRepository.findById(request.getId()).get();
+        deck.setName(request.getName());
+        deck.setDescription(request.getDescription());
+
+        return DeckMapper.toDeckDetailsDto(this.deckRepository.save(deck));
     }
 
-    public Deck addCards(DeckUpdateCardsRequest request) {
+    public DeckDetailsDto addCards(DeckUpdateCardsRequest request) {
         List<Card> cards = this.cardRepository.findAllById(request.cardIds);
         Deck deck = this.deckRepository.findById(request.deckId).get();
 
@@ -59,10 +65,10 @@ public class DeckService {
             card.setDeck(deck);
         }
 
-        return this.deckRepository.save(deck);
+        return DeckMapper.toDeckDetailsDto(this.deckRepository.save(deck));
     }
 
-    public Deck removeCards(DeckUpdateCardsRequest request) {
+    public DeckDetailsDto removeCards(DeckUpdateCardsRequest request) {
         List<Card> cards = this.cardRepository.findAllById(request.cardIds);
         Deck deck = this.deckRepository.findById(request.deckId).get();
 
@@ -71,7 +77,7 @@ public class DeckService {
             card.setDeck(null);
         }
 
-        return this.deckRepository.save(deck);
+        return DeckMapper.toDeckDetailsDto(this.deckRepository.save(deck));
     }
 
     // DELETE

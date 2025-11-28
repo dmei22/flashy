@@ -1,8 +1,6 @@
 package dmei22.flashy.controller;
 
-import dmei22.flashy.dto.deck.DeckDetailsDto;
-import dmei22.flashy.dto.deck.DeckOverviewDto;
-import dmei22.flashy.dto.deck.DeckUpdateCardsRequest;
+import dmei22.flashy.dto.deck.*;
 import dmei22.flashy.model.Deck;
 import dmei22.flashy.service.DeckService;
 import dmei22.flashy.service.mapper.DeckMapper;
@@ -10,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/deck")
@@ -25,9 +22,9 @@ public class DeckController {
 
     // CREATE
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody Deck deck) {
-        Deck response = this.deckService.create(deck);
-        return ResponseEntity.ok(DeckMapper.toDeckDetailsDto(response));
+    public ResponseEntity<?> create(@RequestBody DeckCreateRequest request) {
+        DeckOverviewDto response = this.deckService.create(request);
+        return ResponseEntity.ok(response);
     }
 
     // READ
@@ -45,21 +42,21 @@ public class DeckController {
 
     // UPDATE
     @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody Deck deck) {
-        Deck response = this.deckService.update(deck);
-        return ResponseEntity.ok(DeckMapper.toDeckDetailsDto(response));
+    public ResponseEntity<?> update(@RequestBody DeckUpdateRequest request) {
+        DeckDetailsDto response = this.deckService.update(request);
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/add/cards")
     public ResponseEntity<?> addCards(@RequestBody DeckUpdateCardsRequest request) {
-        Deck response = this.deckService.addCards(request);
-        return ResponseEntity.ok(DeckMapper.toDeckDetailsDto(response));
+        DeckDetailsDto response = this.deckService.addCards(request);
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/remove/cards")
     public ResponseEntity<?> removeCards(@RequestBody DeckUpdateCardsRequest request) {
-        Deck response = this.deckService.removeCards(request);
-        return ResponseEntity.ok(DeckMapper.toDeckDetailsDto(response));
+        DeckDetailsDto response = this.deckService.removeCards(request);
+        return ResponseEntity.ok(response);
     }
 
     // DELETE

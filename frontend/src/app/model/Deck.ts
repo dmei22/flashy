@@ -17,3 +17,9 @@ export interface DeckCreateRequest {
     name: string
     description: string
 }
+
+export interface DeckUpdateRequest {
+    id: number
+    name: string
+    description: string
+}
