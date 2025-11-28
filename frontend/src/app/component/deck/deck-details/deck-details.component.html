@@ -5,6 +5,9 @@
 			<div class="card-body">
 				<h1 class="card-title">{{ deck()?.name }}</h1>
 				<p class="card-text">{{ deck()?.description }}</p>
+				<button class="btn btn-danger"
+						type="button"
+						(click)="onDelete()">Delete</button>
 			</div>
 		</div>
 	</div>

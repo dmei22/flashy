@@ -4,13 +4,15 @@ import {DeckService} from "../../../service/deck.service";
 import {RouterLink} from "@angular/router";
 import {DeckOverview} from "../../../model/Deck";
 import {DefaultDeckOverviews} from "../../../resource/DefaultDecks";
+import {DeckCreateComponent} from "../deck-create/deck-create.component";
 
 @Component({
   selector: 'app-deck-overview',
-  imports: [
-    NgForOf,
-    RouterLink
-  ],
+    imports: [
+        NgForOf,
+        RouterLink,
+        DeckCreateComponent
+    ],
   templateUrl: './deck-overview.component.html',
   styleUrl: './deck-overview.component.css'
 })

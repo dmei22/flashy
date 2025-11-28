@@ -1,1 +1,53 @@
-<p>deck-create works!</p>
+<button type="button"
+		class="btn btn-primary"
+		data-bs-toggle="modal"
+		data-bs-target="#create-deck-modal"
+>
+	Create new Deck
+</button>
+
+<div class="modal fade" id="create-deck-modal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title">Deck Creation</h1>
+				<button type="button"
+						class="btn-close"
+						data-bs-dismiss="modal"
+						id="create-deck-modal-close"
+				></button>
+			</div>
+			<div class="modal-body">
+
+				{{ deckForm.value | json }}
+
+				<div [formGroup]="deckForm">
+					<div>
+						<label class="form-label">Name</label>
+						<input class="form-control"
+							   type="text"
+							   formControlName="name"
+						>
+					</div>
+
+					<div>
+						<label class="form-label">Description</label>
+						<textarea class="form-control"
+								  type="text"
+								  rows="3"
+								  formControlName="description"
+						></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary"
+						type="button"
+						(click)="onSubmit()"
+				>
+					Create
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

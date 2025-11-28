@@ -1,12 +1,6 @@
 <div class="row">
 	<div class="col g-0">
-		<button type="button"
-				class="btn btn-primary"
-				data-bs-toggle="modal"
-				data-bs-target="#create-deck-modal"
-		>
-			Create new Deck
-		</button>
+		<app-deck-create></app-deck-create>
 	</div>
 </div>
 
@@ -15,38 +9,6 @@
 		<div class="card" routerLink="/deck/{{ deck.id }}">
 			<div class="card-body">
 				<p class="card-title">{{ deck.name }}</p>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" id="create-deck-modal" tabindex="-1" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title">Deck Creation</h1>
-				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-			</div>
-			<div class="modal-body">
-				<form>
-					<div>
-						<label class="form-label">Name</label>
-						<input class="form-control"
-							   type="text"
-						>
-					</div>
-
-					<div>
-						<label class="form-label">Description</label>
-						<textarea class="form-control"
-								  type="text"
-								  rows="3"
-						></textarea>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Create</button>
 			</div>
 		</div>
 	</div>

@@ -13,7 +13,7 @@ export interface DeckDetails {
     cards: CardOverview[]
 }
 
-export interface CreateDeckRequest {
+export interface DeckCreateRequest {
     name: string
     description: string
 }
