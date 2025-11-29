@@ -18,7 +18,8 @@ public class DeckService {
     private final DeckRepository deckRepository;
     private final CardRepository cardRepository;
 
-    public DeckService(DeckRepository deckRepository, CardRepository cardRepository) {
+    public DeckService(DeckRepository deckRepository,
+                       CardRepository cardRepository) {
         this.deckRepository = deckRepository;
         this.cardRepository = cardRepository;
     }
@@ -35,6 +36,7 @@ public class DeckService {
     // READ
     public DeckDetailsDto findById(Long id) {
         Deck deck = this.deckRepository.findById(id).get();
+
         return DeckMapper.toDeckDetailsDto(deck);
     }
 

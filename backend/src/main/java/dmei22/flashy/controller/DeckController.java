@@ -1,9 +1,7 @@
 package dmei22.flashy.controller;
 
 import dmei22.flashy.dto.deck.*;
-import dmei22.flashy.model.Deck;
 import dmei22.flashy.service.DeckService;
-import dmei22.flashy.service.mapper.DeckMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +22,7 @@ public class DeckController {
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody DeckCreateRequest request) {
         DeckOverviewDto response = this.deckService.create(request);
+
         return ResponseEntity.ok(response);
     }
 
@@ -31,12 +30,14 @@ public class DeckController {
     @GetMapping("/find/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Long id) {
         DeckDetailsDto response = this.deckService.findById(id);
+
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/all")
     public ResponseEntity<?> all() {
         List<DeckOverviewDto> decks = this.deckService.all();
+
         return ResponseEntity.ok(decks);
     }
 
@@ -44,18 +45,21 @@ public class DeckController {
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody DeckUpdateRequest request) {
         DeckDetailsDto response = this.deckService.update(request);
+
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/add/cards")
     public ResponseEntity<?> addCards(@RequestBody DeckUpdateCardsRequest request) {
         DeckDetailsDto response = this.deckService.addCards(request);
+
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/remove/cards")
     public ResponseEntity<?> removeCards(@RequestBody DeckUpdateCardsRequest request) {
         DeckDetailsDto response = this.deckService.removeCards(request);
+
         return ResponseEntity.ok(response);
     }
 
@@ -63,6 +67,7 @@ public class DeckController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Long id) {
         this.deckService.deleteById(id);
+
         return ResponseEntity.ok(null);
     }
 }

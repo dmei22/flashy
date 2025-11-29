@@ -1,6 +1,5 @@
 package dmei22.flashy.service.mapper;
 
-
 import dmei22.flashy.dto.card.CardOverviewDto;
 import dmei22.flashy.dto.deck.DeckDetailsDto;
 import dmei22.flashy.dto.deck.DeckOverviewDto;
