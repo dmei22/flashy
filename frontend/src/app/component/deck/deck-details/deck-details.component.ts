@@ -6,6 +6,7 @@ import {DeckDetails} from "../../../model/Deck";
 import {NgForOf} from "@angular/common";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {CardCreateComponent} from "../../card/card-create/card-create.component";
+import {BreadcrumbComponent} from "../../breadcrumb/breadcrumb.component";
 
 @Component({
   selector: 'app-deck-details',
@@ -14,6 +15,7 @@ import {CardCreateComponent} from "../../card/card-create/card-create.component"
         ReactiveFormsModule,
         CardCreateComponent,
         RouterLink,
+        BreadcrumbComponent,
     ],
   templateUrl: './deck-details.component.html',
   styleUrl: './deck-details.component.css'

@@ -1,3 +1,10 @@
+<app-breadcrumb [items]="[
+			{ label: 'Home', routerLink: '/'},
+			{ label: 'Decks', routerLink: '/decks'},
+			{ label: 'Deck Details', routerLink: '/deck/' + deck()?.id },
+		]"
+></app-breadcrumb>
+
 <div class="row">
 	<!--Left: Deck details & actions-->
 	<div class="col-4 g-0">
@@ -24,13 +31,13 @@
 	</div>
 
 	<!--Right: Deck Cards-->
-	<div class="col-8 g-0">
-		<div class="list-group">
-			<div *ngFor="let card of deck()?.cards"
+	<div class="col-8 g-0 ps-5">
+		<ul class="list-group">
+			<li *ngFor="let card of deck()?.cards"
 				 class="list-group-item"
 				 [routerLink]="['/card', card.id]"
-			>{{ card.front }}</div>
-		</div>
+			>{{ card.front }}</li>
+		</ul>
 	</div>
 </div>
 

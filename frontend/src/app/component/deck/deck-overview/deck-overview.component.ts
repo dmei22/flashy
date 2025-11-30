@@ -5,13 +5,15 @@ import {RouterLink} from "@angular/router";
 import {DeckOverview} from "../../../model/Deck";
 import {DefaultDeckOverviews} from "../../../resource/DefaultDecks";
 import {DeckCreateComponent} from "../deck-create/deck-create.component";
+import {BreadcrumbComponent} from "../../breadcrumb/breadcrumb.component";
 
 @Component({
   selector: 'app-deck-overview',
     imports: [
         NgForOf,
         RouterLink,
-        DeckCreateComponent
+        DeckCreateComponent,
+        BreadcrumbComponent
     ],
   templateUrl: './deck-overview.component.html',
   styleUrl: './deck-overview.component.css'

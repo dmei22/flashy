@@ -1,19 +1,27 @@
+<app-breadcrumb [items]="[
+			{ label: 'Home', routerLink: '/'},
+			{ label: 'Decks', routerLink: '/decks'},
+			{ label: 'Deck Details', routerLink: '/deck/' + cardDetails()?.deckId },
+			{ label: 'Card Details', routerLink: '' },
+		]"
+></app-breadcrumb>
+
 <div class="row row-cols-2 g-0">
 	<div class="col-6 g-0 pe-3">
 		<app-card-face [label]="'Front Side'"
-					   [body]=card()?.front
+					   [body]=cardDetails()?.front
 		></app-card-face>
 	</div>
 	<div class="col-6 g-0 ps-3">
 		<app-card-face [label]="'Back Side'"
-					   [body]=card()?.back
+					   [body]=cardDetails()?.back
 		></app-card-face>
 	</div>
 </div>
 
 <div class="d-inline-flex gap-2">
 	<button type="button"
-			class="btn btn-primary"
+			class="btn btn-warning"
 			data-bs-toggle="modal"
 			data-bs-target="#card-update-modal"
 	>Edit Card</button>

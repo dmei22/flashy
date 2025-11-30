@@ -1,6 +1,7 @@
 package dmei22.flashy.controller;
 
 import dmei22.flashy.dto.card.CardCreateRequest;
+import dmei22.flashy.dto.card.CardDetailsDto;
 import dmei22.flashy.dto.card.CardUpdateRequest;
 import dmei22.flashy.model.Card;
 import dmei22.flashy.service.CardService;
@@ -30,7 +31,7 @@ public class CardController {
     // READ
     @GetMapping("/find/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Long id) {
-        Card response = this.cardService.findById(id);
+        CardDetailsDto response = this.cardService.findById(id);
         return ResponseEntity.ok(response);
     }
 
@@ -43,7 +44,7 @@ public class CardController {
     // UPDATE
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody CardUpdateRequest request) {
-        Card response = this.cardService.update(request);
+        CardDetailsDto response = this.cardService.update(request);
         return ResponseEntity.ok(response);
     }
 

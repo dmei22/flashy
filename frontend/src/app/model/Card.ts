@@ -6,6 +6,13 @@ export interface CardOverview {
     back: string,
 }
 
+export interface CardDetails {
+    id: number
+    front: string
+    back: string
+    deckId: number
+}
+
 export interface Card {
     id: number,
     front: string,

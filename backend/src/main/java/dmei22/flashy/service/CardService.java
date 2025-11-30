@@ -1,11 +1,13 @@
 package dmei22.flashy.service;
 
 import dmei22.flashy.dto.card.CardCreateRequest;
+import dmei22.flashy.dto.card.CardDetailsDto;
 import dmei22.flashy.dto.card.CardUpdateRequest;
 import dmei22.flashy.model.Card;
 import dmei22.flashy.model.Deck;
 import dmei22.flashy.repository.CardRepository;
 import dmei22.flashy.repository.DeckRepository;
+import dmei22.flashy.service.mapper.CardMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,8 +41,9 @@ public class CardService {
     }
 
     // READ
-    public Card findById(Long id) {
-        return this.cardRepository.findById(id).get();
+    public CardDetailsDto findById(Long id) {
+        Card card = this.cardRepository.findById(id).get();
+        return CardMapper.toCardDetailsDto(card);
     }
 
     public List<Card> all() {
@@ -48,12 +51,12 @@ public class CardService {
     }
 
     // UPDATE
-    public Card update(CardUpdateRequest request) {
+    public CardDetailsDto update(CardUpdateRequest request) {
         Card card = this.cardRepository.findById(request.getCardId()).get();
         card.setFront(request.getFront());
         card.setBack(request.getBack());
 
-        return this.cardRepository.save(card);
+        return CardMapper.toCardDetailsDto(this.cardRepository.save(card));
     }
 
     // DELETE

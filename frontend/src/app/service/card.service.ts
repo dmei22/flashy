@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Card, CardCreateRequest, CardOverview, CardUpdateRequest} from "../model/Card";
+import {Card, CardCreateRequest, CardDetails, CardOverview, CardUpdateRequest} from "../model/Card";
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +23,13 @@ export class CardService {
     return this.http.get<Card[]>(this.baseUrl + "/card/all");
   }
 
-  public getById(id: number): Observable<Card> {
-    return this.http.get<Card>(`${this.baseUrl}/card/find/${id}`);
+  public getById(id: number): Observable<CardDetails> {
+    return this.http.get<CardDetails>(`${this.baseUrl}/card/find/${id}`);
   }
 
   // UPDATE
-  public update(request: CardUpdateRequest): Observable<Card> {
-    return this.http.put<Card>(`${this.baseUrl}/card/update`, request);
+  public update(request: CardUpdateRequest): Observable<CardDetails> {
+    return this.http.put<CardDetails>(`${this.baseUrl}/card/update`, request);
   }
 
   // DELETE

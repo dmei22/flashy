@@ -1,0 +1,10 @@
+<div class="col-12">
+	<ol class="breadcrumb">
+		<li *ngFor="let item of items(); let last = last"
+			class="breadcrumb-item"
+			[class.active]="last"
+			[class.link-primary]="!last"
+			[routerLink]="[item.routerLink]"
+		>{{ item.label }}</li>
+	</ol>
+</div>
