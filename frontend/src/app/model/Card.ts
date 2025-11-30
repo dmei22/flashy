@@ -12,3 +12,9 @@ export interface Card {
     back: string,
     reviews: Review[]
 }
+
+export interface CardCreateRequest {
+    deckId: number
+    front: string
+    back: string
+}

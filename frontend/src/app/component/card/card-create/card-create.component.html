@@ -1,0 +1,49 @@
+<button type="button"
+		class="btn btn-primary"
+		data-bs-toggle="modal"
+		data-bs-target="#card-create-modal"
+>Add Card</button>
+
+<!--Card create modal-->
+<div class="modal fade" id="card-create-modal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title">Card Creation</h1>
+				<button type="button"
+						class="btn-close"
+						data-bs-dismiss="modal"
+						id="card-create-modal-close"
+				></button>
+			</div>
+			<div class="modal-body">
+				<form [formGroup]="cardCreateForm">
+					<input formControlName="deckId" hidden>
+					<div>
+						<label class="form-label">Front side</label>
+						<textarea class="form-control"
+							   type="text"
+								  rows="5"
+							   formControlName="front"
+						></textarea>
+					</div>
+
+					<div>
+						<label class="form-label">Back side</label>
+						<textarea class="form-control"
+								  type="text"
+								  rows="5"
+								  formControlName="back"
+						></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary"
+						type="button"
+						(click)="onCreate()"
+				>Create</button>
+			</div>
+		</div>
+	</div>
+</div>

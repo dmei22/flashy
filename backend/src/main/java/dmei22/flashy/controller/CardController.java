@@ -1,5 +1,6 @@
 package dmei22.flashy.controller;
 
+import dmei22.flashy.dto.card.CardCreateRequest;
 import dmei22.flashy.model.Card;
 import dmei22.flashy.service.CardService;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,8 @@ public class CardController {
 
     // CREATE
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody Card card) {
-        Card response = this.cardService.create(card);
+    public ResponseEntity<?> create(@RequestBody CardCreateRequest request) {
+        Card response = this.cardService.create(request);
         return ResponseEntity.ok(response);
     }
 

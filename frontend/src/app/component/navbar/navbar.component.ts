@@ -1,10 +1,12 @@
 import {Component, signal} from '@angular/core';
 import {RouterLink} from "@angular/router";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-navbar',
     imports: [
-        RouterLink
+        RouterLink,
+        NgForOf
     ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
@@ -12,6 +14,8 @@ import {RouterLink} from "@angular/router";
 export class NavbarComponent {
 
     protected navItems = signal([
-        { label: "Cards", routerLink: "cards" },
+        { label: "Home", routerLink: "/" },
+        { label: "Decks", routerLink: "/decks" },
+        { label: "Cards", routerLink: "/cards" },
     ]);
 }

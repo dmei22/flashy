@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Card} from "../model/Card";
+import {Card, CardCreateRequest, CardOverview} from "../model/Card";
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,17 @@ export class CardService {
   constructor() { }
 
   // CREATE
-
+  public create(request: CardCreateRequest): Observable<CardOverview> {
+    return this.http.post<CardOverview>(`${this.baseUrl}/card/create`, request);
+  }
 
   // READ
   public getAll(): Observable<Card[]> {
     return this.http.get<Card[]>(this.baseUrl + "/card/all");
+  }
+
+  public getById(id: number): Observable<Card> {
+    return this.http.get<Card>(`${this.baseUrl}/card/find/${id}`);
   }
 
   // UPDATE

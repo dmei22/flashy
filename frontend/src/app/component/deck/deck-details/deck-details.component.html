@@ -1,28 +1,35 @@
 <div class="row">
-	<!--Deck details & actions-->
+	<!--Left: Deck details & actions-->
 	<div class="col-4 g-0">
 		<div class="card">
 			<div class="card-body">
 				<h1 class="card-title">{{ deck()?.name }}</h1>
 				<p class="card-text">{{ deck()?.description }}</p>
-				<button type="button"
-						class="btn btn-warning"
-						data-bs-toggle="modal"
-						data-bs-target="#deck-edit-modal"
-				>Edit Deck</button>
+				<div class="d-inline-flex gap-1">
+					<app-card-create [deckId]="deck()!.id"></app-card-create>
 
-				<button class="btn btn-danger"
-						type="button"
-						(click)="onDelete()"
-				>Delete</button>
+					<button type="button"
+							class="btn btn-warning"
+							data-bs-toggle="modal"
+							data-bs-target="#deck-edit-modal"
+					>Edit</button>
+
+					<button class="btn btn-danger"
+							type="button"
+							(click)="onDelete()"
+					>Delete</button>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<!--Deck Cards-->
+	<!--Right: Deck Cards-->
 	<div class="col-8 g-0">
 		<div class="list-group">
-			<div class="list-group-item" *ngFor="let card of deck()?.cards">{{ card.front }}</div>
+			<div *ngFor="let card of deck()?.cards"
+				 class="list-group-item"
+				 routerLink="/card/{{ card.id }}"
+			>{{ card.front }}</div>
 		</div>
 	</div>
 </div>

@@ -1,17 +1,20 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {DeckService} from "../../../service/deck.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {defaultDeck} from "../../../resource/DefaultDecks";
 import {DeckDetails} from "../../../model/Deck";
 import {NgForOf} from "@angular/common";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {CardCreateComponent} from "../../card/card-create/card-create.component";
 
 @Component({
   selector: 'app-deck-details',
-  imports: [
-    NgForOf,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        NgForOf,
+        ReactiveFormsModule,
+        CardCreateComponent,
+        RouterLink,
+    ],
   templateUrl: './deck-details.component.html',
   styleUrl: './deck-details.component.css'
 })

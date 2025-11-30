@@ -1,7 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {DeckService} from "../../../service/deck.service";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {JsonPipe} from "@angular/common";
 import {DeckOverview} from "../../../model/Deck";
 import {Router} from "@angular/router";
 
@@ -9,7 +8,6 @@ import {Router} from "@angular/router";
   selector: 'app-deck-create',
   imports: [
     ReactiveFormsModule,
-    JsonPipe
   ],
   templateUrl: './deck-create.component.html',
   styleUrl: './deck-create.component.css'
