@@ -18,3 +18,9 @@ export interface CardCreateRequest {
     front: string
     back: string
 }
+
+export interface CardUpdateRequest {
+    cardId: number
+    front: string
+    back: string
+}

@@ -1,6 +1,7 @@
 package dmei22.flashy.service;
 
 import dmei22.flashy.dto.card.CardCreateRequest;
+import dmei22.flashy.dto.card.CardUpdateRequest;
 import dmei22.flashy.model.Card;
 import dmei22.flashy.model.Deck;
 import dmei22.flashy.repository.CardRepository;
@@ -47,7 +48,11 @@ public class CardService {
     }
 
     // UPDATE
-    public Card update(Card card) {
+    public Card update(CardUpdateRequest request) {
+        Card card = this.cardRepository.findById(request.getCardId()).get();
+        card.setFront(request.getFront());
+        card.setBack(request.getBack());
+
         return this.cardRepository.save(card);
     }
 

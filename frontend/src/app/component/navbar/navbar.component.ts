@@ -16,6 +16,5 @@ export class NavbarComponent {
     protected navItems = signal([
         { label: "Home", routerLink: "/" },
         { label: "Decks", routerLink: "/decks" },
-        { label: "Cards", routerLink: "/cards" },
     ]);
 }

@@ -51,7 +51,7 @@ public class DeckService {
 
     // UPDATE
     public DeckDetailsDto update(DeckUpdateRequest request) {
-        Deck deck = this.deckRepository.findById(request.getId()).get();
+        Deck deck = this.deckRepository.findById(request.getDeckId()).get();
         deck.setName(request.getName());
         deck.setDescription(request.getDescription());
 

@@ -1,6 +1,7 @@
 package dmei22.flashy.controller;
 
 import dmei22.flashy.dto.card.CardCreateRequest;
+import dmei22.flashy.dto.card.CardUpdateRequest;
 import dmei22.flashy.model.Card;
 import dmei22.flashy.service.CardService;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +42,8 @@ public class CardController {
 
     // UPDATE
     @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody Card card) {
-        Card response = this.cardService.update(card);
+    public ResponseEntity<?> update(@RequestBody CardUpdateRequest request) {
+        Card response = this.cardService.update(request);
         return ResponseEntity.ok(response);
     }
 

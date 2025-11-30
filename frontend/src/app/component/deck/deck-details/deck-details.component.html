@@ -14,7 +14,7 @@
 							data-bs-target="#deck-edit-modal"
 					>Edit</button>
 
-					<button class="btn btn-danger"
+					<button class="btn btn-outline-danger"
 							type="button"
 							(click)="onDelete()"
 					>Delete</button>
@@ -28,7 +28,7 @@
 		<div class="list-group">
 			<div *ngFor="let card of deck()?.cards"
 				 class="list-group-item"
-				 routerLink="/card/{{ card.id }}"
+				 [routerLink]="['/card', card.id]"
 			>{{ card.front }}</div>
 		</div>
 	</div>

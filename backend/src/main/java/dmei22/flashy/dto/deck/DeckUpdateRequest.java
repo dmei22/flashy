@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DeckUpdateRequest {
-    private Long id;
+    private Long deckId;
     private String name;
     private String description;
 }

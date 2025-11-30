@@ -1,15 +1,67 @@
-<div class="row row-cols-2">
-	<div class="col-6 g-0 pe-5">
-		<div class="card">
-			<div class="card-body">
-				<p class="card-text" style="white-space: pre-wrap">{{ card()?.front }}</p>
-			</div>
-		</div>
+<div class="row row-cols-2 g-0">
+	<div class="col-6 g-0 pe-3">
+		<app-card-face [label]="'Front Side'"
+					   [body]=card()?.front
+		></app-card-face>
 	</div>
-	<div class="col-6 g-0">
-		<div class="card">
-			<div class="card-body" >
-				<p class="card-text" style="white-space: pre-wrap">{{ card()?.back }}</p>
+	<div class="col-6 g-0 ps-3">
+		<app-card-face [label]="'Back Side'"
+					   [body]=card()?.back
+		></app-card-face>
+	</div>
+</div>
+
+<div class="d-inline-flex gap-2">
+	<button type="button"
+			class="btn btn-primary"
+			data-bs-toggle="modal"
+			data-bs-target="#card-update-modal"
+	>Edit Card</button>
+	<button class="btn btn-outline-danger"
+			type="button"
+			(click)="onDelete()"
+	>Delete</button>
+</div>
+
+<!--Card update modal-->
+<div class="modal fade" id="card-update-modal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title">Card Edit</h1>
+				<button type="button"
+						class="btn-close"
+						data-bs-dismiss="modal"
+						id="card-update-modal-close"
+				></button>
+			</div>
+			<div class="modal-body">
+				<form [formGroup]="cardUpdateForm">
+					<input formControlName="cardId" hidden>
+					<div>
+						<label class="form-label">Front side</label>
+						<textarea class="form-control"
+								  type="text"
+								  rows="5"
+								  formControlName="front"
+						></textarea>
+					</div>
+
+					<div>
+						<label class="form-label">Back side</label>
+						<textarea class="form-control"
+								  type="text"
+								  rows="5"
+								  formControlName="back"
+						></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary"
+						type="button"
+						(click)="onUpdate()"
+				>Create</button>
 			</div>
 		</div>
 	</div>
