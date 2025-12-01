@@ -8,8 +8,6 @@ import dmei22.flashy.service.CardService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/card")
 @CrossOrigin("http://localhost:4200/")
@@ -33,12 +31,6 @@ public class CardController {
     public ResponseEntity<?> findById(@PathVariable("id") Long id) {
         CardDetailsDto response = this.cardService.findById(id);
         return ResponseEntity.ok(response);
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<?> all() {
-        List<Card> cards = this.cardService.all();
-        return ResponseEntity.ok(cards);
     }
 
     // UPDATE

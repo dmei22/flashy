@@ -1,7 +1,7 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {CardService} from "../../../service/card.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Card, CardDetails} from "../../../model/Card";
+import {CardDetails} from "../../../model/Card";
 import {CardFaceComponent} from "./card-face/card-face.component";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {BreadcrumbComponent} from "../../breadcrumb/breadcrumb.component";
@@ -76,7 +76,7 @@ export class CardDetailsComponent implements OnInit {
     this.cardService.deleteById(this.cardDetails()!.id).subscribe({
       next: () => {
         console.log("Delete Card success");
-        this.router.navigate(["/decks"]);
+        this.router.navigate(["/deck", this.cardDetails()?.deckId]);
       },
       error: (error) => {
         console.log("Failed to delete Card");
