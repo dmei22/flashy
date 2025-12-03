@@ -9,4 +9,5 @@ public class DeckOverviewDto {
     private Long id;
     private String name;
     private String description;
+    private Long imageId;
 }

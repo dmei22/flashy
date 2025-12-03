@@ -14,4 +14,5 @@ public class DeckDetailsDto {
     private String name;
     private String description;
     private List<CardOverviewDto> cards;
+    private Long imageId;
 }

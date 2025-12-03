@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {DeckService} from "../../../service/deck.service";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {DeckOverview} from "../../../model/Deck";
+import {DeckDetails, DeckOverview} from "../../../model/Deck";
 import {Router} from "@angular/router";
 
 @Component({
@@ -24,25 +24,24 @@ export class DeckCreateComponent implements OnInit {
     this.buildForm();
   }
 
-  private buildForm(): void {
-    this.deckForm = this.formBuilder.group({
-      name: "",
-      description: "",
-    });
-  }
-
   protected onSubmit(): void {
     document.getElementById("deck-create-modal-close")?.click();
 
     this.deckService.create(this.deckForm.value).subscribe({
       next: (response: DeckOverview) => {
-        console.log("Create new Deck success");
         this.router.navigate(["deck/", response.id]);
       },
       error: (error) => {
-        console.log("Failed to create new Deck");
         console.log(error);
     }
+    });
+  }
+
+  // Helpers methods
+  private buildForm(): void {
+    this.deckForm = this.formBuilder.group({
+      name: "",
+      description: "",
     });
   }
 }

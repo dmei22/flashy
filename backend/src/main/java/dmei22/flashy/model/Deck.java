@@ -1,5 +1,6 @@
 package dmei22.flashy.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,10 @@ public class Deck {
     private String description;
 
     @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL)
-
     private Set<Card> cards = new HashSet<>();
+
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH}, orphanRemoval = true)
+    @JoinColumn(name = "image_id")
+    @Nullable
+    private Image image;
 }

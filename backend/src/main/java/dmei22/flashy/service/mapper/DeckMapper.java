@@ -14,6 +14,7 @@ public class DeckMapper {
         dto.setId(deck.getId());
         dto.setName(deck.getName());
         dto.setDescription(deck.getDescription());
+        dto.setImageId(deck.getImage() != null ? deck.getImage().getId() : null);
 
         return dto;
     }
@@ -23,6 +24,7 @@ public class DeckMapper {
         dto.setId(deck.getId());
         dto.setName(deck.getName());
         dto.setDescription(deck.getDescription());
+        dto.setImageId(deck.getImage() != null ? deck.getImage().getId() : null);
         List<CardOverviewDto> cards = deck
                 .getCards()
                 .stream()

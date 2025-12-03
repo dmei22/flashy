@@ -1,18 +1,28 @@
 import {CardOverview} from "./Card";
 
-export interface DeckOverview {
-    id: number
-    name: string
-    description: string
+// DTO's
+export class DeckOverview {
+    public id!: number
+    public name!: string
+    public description!: string
+    public imageId!: number
+
+    constructor() {
+    }
 }
 
-export interface DeckDetails {
-    id: number
-    name: string
-    description: string
-    cards: CardOverview[]
+export class DeckDetails {
+    public id!: number
+    public name!: string
+    public description!: string
+    public cards!: CardOverview[]
+    public imageId!: number
+
+    constructor() {
+    }
 }
 
+// Requests & Responses
 export interface DeckCreateRequest {
     name: string
     description: string

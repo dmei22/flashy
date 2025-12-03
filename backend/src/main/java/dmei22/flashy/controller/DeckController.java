@@ -1,9 +1,11 @@
 package dmei22.flashy.controller;
 
 import dmei22.flashy.dto.deck.*;
+import dmei22.flashy.model.Image;
 import dmei22.flashy.service.DeckService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,6 +26,17 @@ public class DeckController {
         DeckOverviewDto response = this.deckService.create(request);
 
         return ResponseEntity.ok(response);
+    }
+
+    // TODO: CREATE IMAGE
+    @PostMapping("/{id}/image")
+    public ResponseEntity<Long> uploadImage(
+            @PathVariable("id") Long id,
+            @RequestParam MultipartFile file
+    ) {
+        Image image = this.deckService.uploadImage(id, file);
+
+        return ResponseEntity.ok(image.getId());
     }
 
     // READ
@@ -49,25 +62,11 @@ public class DeckController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/add/cards")
-    public ResponseEntity<?> addCards(@RequestBody DeckUpdateCardsRequest request) {
-        DeckDetailsDto response = this.deckService.addCards(request);
-
-        return ResponseEntity.ok(response);
-    }
-
-    @PutMapping("/remove/cards")
-    public ResponseEntity<?> removeCards(@RequestBody DeckUpdateCardsRequest request) {
-        DeckDetailsDto response = this.deckService.removeCards(request);
-
-        return ResponseEntity.ok(response);
-    }
-
     // DELETE
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Long id) {
         this.deckService.deleteById(id);
 
-        return ResponseEntity.ok(null);
+        return ResponseEntity.noContent().build();
     }
 }

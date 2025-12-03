@@ -1,11 +1,16 @@
 package dmei22.flashy.controller;
 
-import dmei22.flashy.repository.ImageRepository;
+import dmei22.flashy.model.Image;
 import dmei22.flashy.service.ImageService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-@RequestMapping("/deck")
+import java.io.IOException;
+
+@RestController
+@RequestMapping("/image")
 @CrossOrigin("http://localhost:4200/")
 public class ImageController {
 
@@ -19,7 +24,14 @@ public class ImageController {
 
 
     // READ
+    @GetMapping("/{id}")
+    public ResponseEntity<byte[]> getById(@PathVariable("id") Long id) {
+        Image image = this.imageService.getById(id);
 
+        return ResponseEntity.ok()
+            .contentType(MediaType.parseMediaType(image.getFileType()))
+            .body(image.getBytes());
+    }
 
     // UPDATE
 

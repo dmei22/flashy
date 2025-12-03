@@ -5,10 +5,19 @@
 		]"
 ></app-breadcrumb>
 
+<app-image-manager [entity]="deck()!"
+				   (updateOutput)="getImage($event)"
+></app-image-manager>
+
 <div class="row">
 	<!--Left: Deck details & actions-->
 	<div class="col-4 g-0">
 		<div class="card">
+			<img class="card-img-top"
+				 src="{{ imageUrl() }}"
+				 alt="{{ deck()?.name }}"
+				 *ngIf="imageUrl()"
+			>
 			<div class="card-body">
 				<h1 class="card-title">{{ deck()?.name }}</h1>
 				<p class="card-text">{{ deck()?.description }}</p>

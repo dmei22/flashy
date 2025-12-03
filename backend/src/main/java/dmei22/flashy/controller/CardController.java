@@ -23,6 +23,7 @@ public class CardController {
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CardCreateRequest request) {
         Card response = this.cardService.create(request);
+
         return ResponseEntity.ok(response);
     }
 
@@ -30,6 +31,7 @@ public class CardController {
     @GetMapping("/find/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Long id) {
         CardDetailsDto response = this.cardService.findById(id);
+
         return ResponseEntity.ok(response);
     }
 
@@ -37,6 +39,7 @@ public class CardController {
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody CardUpdateRequest request) {
         CardDetailsDto response = this.cardService.update(request);
+
         return ResponseEntity.ok(response);
     }
 
@@ -44,6 +47,7 @@ public class CardController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Long id) {
         this.cardService.deleteById(id);
-        return ResponseEntity.ok(null);
+
+        return ResponseEntity.noContent().build();
     }
 }
