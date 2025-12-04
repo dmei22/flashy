@@ -1,8 +1,10 @@
 package dmei22.flashy.controller;
 
 import dmei22.flashy.dto.deck.*;
+import dmei22.flashy.model.Deck;
 import dmei22.flashy.model.Image;
 import dmei22.flashy.service.DeckService;
+import dmei22.flashy.service.ImageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,9 +17,14 @@ import java.util.List;
 public class DeckController {
 
     private final DeckService deckService;
+    private final ImageService imageService;
 
-    public DeckController(DeckService deckService) {
+    public DeckController(
+            DeckService deckService,
+            ImageService imageService
+    ) {
         this.deckService = deckService;
+        this.imageService = imageService;
     }
 
     // CREATE
@@ -60,6 +67,16 @@ public class DeckController {
         DeckDetailsDto response = this.deckService.update(request);
 
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}/image")
+    public ResponseEntity<?> updateImage(
+            @PathVariable("id") Long deckId,
+            @RequestParam MultipartFile file
+    ) {
+        this.deckService.updateImage(deckId, file);
+
+        return ResponseEntity.noContent().build();
     }
 
     // DELETE

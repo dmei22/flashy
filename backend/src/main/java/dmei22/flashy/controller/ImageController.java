@@ -25,7 +25,7 @@ public class ImageController {
 
     // READ
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> getById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         Image image = this.imageService.getById(id);
 
         return ResponseEntity.ok()

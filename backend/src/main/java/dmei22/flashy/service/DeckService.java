@@ -6,6 +6,7 @@ import dmei22.flashy.model.Deck;
 import dmei22.flashy.model.Image;
 import dmei22.flashy.repository.CardRepository;
 import dmei22.flashy.repository.DeckRepository;
+import dmei22.flashy.repository.ImageRepository;
 import dmei22.flashy.service.mapper.DeckMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,6 +75,15 @@ public class DeckService {
         deck.setDescription(request.getDescription());
 
         return DeckMapper.toDeckDetailsDto(this.deckRepository.save(deck));
+    }
+
+    public void updateImage(Long deckId, MultipartFile file) {
+        Deck deck = this.deckRepository.findById(deckId).get();
+        Image image = this.imageService.update(deck.getImage().getId(), file);
+
+        deck.setImage(image);
+
+        this.deckRepository.save(deck);
     }
 
     // DELETE

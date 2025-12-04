@@ -63,8 +63,8 @@ export class DeckDetailsComponent implements OnInit {
     })
   }
 
-  protected getImage(id: number): void {
-    this.imageService.getUrlById(id).subscribe({
+  protected getImage(imageId: number): void {
+    this.imageService.getUrlById(imageId).subscribe({
       next: (response: string) => {
         this.imageUrl.set(response);
       },
@@ -84,7 +84,7 @@ export class DeckDetailsComponent implements OnInit {
     this.deckService.getById(id).subscribe({
       next: (response: DeckDetails) => {
         this.deck.set(response);
-        this.getImage(response.id);
+        this.getImage(response.imageId);
         this.buildDeckEditForm();
       },
       error: (error) => {
