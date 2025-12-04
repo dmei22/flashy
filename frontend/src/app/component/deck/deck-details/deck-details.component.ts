@@ -1,8 +1,8 @@
-import {Component, effect, inject, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {DeckService} from "../../../service/deck.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {DeckDetails} from "../../../model/Deck";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf} from "@angular/common";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {CardCreateComponent} from "../../card/card-create/card-create.component";
 import {BreadcrumbComponent} from "../../breadcrumb/breadcrumb.component";
@@ -18,7 +18,6 @@ import {ImageService} from "../../../service/image.service";
     RouterLink,
     BreadcrumbComponent,
     ImageManagerComponent,
-    NgIf,
   ],
   templateUrl: './deck-details.component.html',
   styleUrl: './deck-details.component.css'
@@ -33,7 +32,7 @@ export class DeckDetailsComponent implements OnInit {
 
   protected deck = signal<DeckDetails | null>(null);
   protected deckEditForm!: FormGroup;
-  protected imageUrl = signal<string | null>(null);
+  protected imageUrl = signal<string | null>("/assets/image/default_image.jpeg");
 
   ngOnInit() {
     this.getDeckId();
@@ -63,7 +62,12 @@ export class DeckDetailsComponent implements OnInit {
     })
   }
 
-  protected getImage(imageId: number): void {
+  protected getImage(imageId: number | null): void {
+    if (imageId === null) {
+      this.imageUrl.set("/assets/image/default_image.jpeg");
+      return;
+    }
+
     this.imageService.getUrlById(imageId).subscribe({
       next: (response: string) => {
         this.imageUrl.set(response);

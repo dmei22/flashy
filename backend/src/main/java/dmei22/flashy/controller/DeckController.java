@@ -86,4 +86,10 @@ public class DeckController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/{id}/image")
+    public ResponseEntity<?> deleteImage(@PathVariable("id") Long deckId) {
+        this.deckService.deleteImage(deckId);
+
+        return ResponseEntity.noContent().build();}
 }

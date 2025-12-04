@@ -90,4 +90,12 @@ public class DeckService {
     public void deleteById(Long id) {
         this.deckRepository.deleteById(id);
     }
+
+    public void deleteImage(Long deckId) {
+        Deck deck = this.deckRepository.findById(deckId).get();
+
+        deck.setImage(null);
+
+        this.deckRepository.save(deck);
+    }
 }

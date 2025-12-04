@@ -43,7 +43,7 @@ export class DeckService {
   }
 
   // DELETE
-  public deleteById(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/deck/delete/${id}`);
+  public deleteById(deckId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/deck/delete/${deckId}`);
   }
 }

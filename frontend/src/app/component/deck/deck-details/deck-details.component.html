@@ -13,10 +13,9 @@
 	<!--Left: Deck details & actions-->
 	<div class="col-4 g-0">
 		<div class="card">
-			<img class="card-img-top"
-				 src="{{ imageUrl() }}"
-				 alt="{{ deck()?.name }}"
-				 *ngIf="imageUrl()"
+			<img class="card-img-top object-fit-cover"
+				 [src]="imageUrl()"
+				 [alt]="deck()?.name"
 			>
 			<div class="card-body">
 				<h1 class="card-title">{{ deck()?.name }}</h1>
