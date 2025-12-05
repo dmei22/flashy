@@ -13,6 +13,10 @@
 <div class="row row-cols-4">
 	<div class="col col-3 g-0" *ngFor="let deck of deckOverviews()">
 		<div class="card" [routerLink]="['/deck', deck.id]">
+			<img class="card-img-top"
+				 [src]="deck.imageUrl ? deck.imageUrl : imageService.defaultImageUrl"
+				 [alt]="deck.name"
+			>
 			<div class="card-body">
 				<h5 class="card-title">{{ deck.name }}</h5>
 				<p class="card-subtitle text-body-secondary text-truncate">{{ deck.description }}</p>

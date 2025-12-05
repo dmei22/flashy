@@ -5,6 +5,7 @@ import dmei22.flashy.model.Deck;
 import dmei22.flashy.model.Image;
 import dmei22.flashy.service.DeckService;
 import dmei22.flashy.service.ImageService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,7 +36,6 @@ public class DeckController {
         return ResponseEntity.ok(response);
     }
 
-    // TODO: CREATE IMAGE
     @PostMapping("/{id}/image")
     public ResponseEntity<Long> uploadImage(
             @PathVariable("id") Long id,
@@ -59,6 +59,15 @@ public class DeckController {
         List<DeckOverviewDto> decks = this.deckService.all();
 
         return ResponseEntity.ok(decks);
+    }
+
+    @GetMapping("/{id}/image")
+    public ResponseEntity<?> deckImage(@PathVariable("id") Long deckId) {
+        Image image = this.deckService.deckImage(deckId);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(image.getFileType()))
+                .body(image.getBytes());
     }
 
     // UPDATE

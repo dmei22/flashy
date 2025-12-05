@@ -5,6 +5,7 @@ import {RouterLink} from "@angular/router";
 import {DeckOverview} from "../../../model/Deck";
 import {DeckCreateComponent} from "../deck-create/deck-create.component";
 import {BreadcrumbComponent} from "../../breadcrumb/breadcrumb.component";
+import {ImageService} from "../../../service/image.service";
 
 @Component({
   selector: 'app-deck-overview',
@@ -20,6 +21,7 @@ import {BreadcrumbComponent} from "../../breadcrumb/breadcrumb.component";
 export class DeckOverviewComponent implements OnInit {
 
   private deckService = inject(DeckService);
+  protected imageService = inject(ImageService);
   protected deckOverviews = signal<DeckOverview[]>([]);
 
   ngOnInit() {

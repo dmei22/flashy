@@ -25,17 +25,21 @@ import {ImageService} from "../../../service/image.service";
 export class DeckDetailsComponent implements OnInit {
 
   private deckService = inject(DeckService);
-  private imageService = inject(ImageService);
+  protected imageService = inject(ImageService);
   private activatedRoute = inject(ActivatedRoute);
   private formBuilder = inject(FormBuilder);
   private route = inject(Router);
 
   protected deck = signal<DeckDetails | null>(null);
   protected deckEditForm!: FormGroup;
-  protected imageUrl = signal<string | null>("/assets/image/default_image.jpeg");
 
-  ngOnInit() {
+  public ngOnInit() {
     this.getDeckId();
+  }
+
+  protected getDeckId(): void {
+    const id: number = Number(this.activatedRoute.snapshot.paramMap.get("id"));
+    this.getDeckById(id);
   }
 
   protected onEdit(): void {
@@ -62,33 +66,11 @@ export class DeckDetailsComponent implements OnInit {
     })
   }
 
-  protected getImage(imageId: number | null): void {
-    if (imageId === null) {
-      this.imageUrl.set("/assets/image/default_image.jpeg");
-      return;
-    }
-
-    this.imageService.getUrlById(imageId).subscribe({
-      next: (response: string) => {
-        this.imageUrl.set(response);
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
-  }
-
   // Helper methods
-  private getDeckId(): void {
-    const id: number = Number(this.activatedRoute.snapshot.paramMap.get("id"));
-    this.getDeckById(id);
-  }
-
   private getDeckById(id: number): void {
     this.deckService.getById(id).subscribe({
       next: (response: DeckDetails) => {
         this.deck.set(response);
-        this.getImage(response.imageId);
         this.buildDeckEditForm();
       },
       error: (error) => {

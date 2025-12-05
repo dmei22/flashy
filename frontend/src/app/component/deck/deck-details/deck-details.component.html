@@ -6,7 +6,7 @@
 ></app-breadcrumb>
 
 <app-image-manager [entity]="deck()!"
-				   (updateOutput)="getImage($event)"
+				   (updateOutput)="getDeckId()"
 ></app-image-manager>
 
 <div class="row">
@@ -14,7 +14,7 @@
 	<div class="col-4 g-0">
 		<div class="card">
 			<img class="card-img-top object-fit-cover"
-				 [src]="imageUrl()"
+				 [src]="deck()?.imageUrl ? deck()?.imageUrl : imageService.defaultImageUrl"
 				 [alt]="deck()?.name"
 			>
 			<div class="card-body">

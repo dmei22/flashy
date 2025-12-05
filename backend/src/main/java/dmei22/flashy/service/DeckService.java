@@ -67,6 +67,13 @@ public class DeckService {
         return decks;
     }
 
+    public Image deckImage(Long deckId) {
+        Deck deck = this.deckRepository.findById(deckId).get();
+        Image image = deck.getImage();
+
+        return image;
+    }
+
     // UPDATE
     public DeckDetailsDto update(DeckUpdateRequest request) {
         Deck deck = this.deckRepository.findById(request.getDeckId()).get();

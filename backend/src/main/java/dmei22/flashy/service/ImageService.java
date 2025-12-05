@@ -18,7 +18,6 @@ public class ImageService {
     }
 
     // CREATE
-    // TODO: CREATE IMAGE
     public Image upload(MultipartFile file){
         Image image = new Image();
         try {
@@ -31,8 +30,8 @@ public class ImageService {
     }
 
     // READ
-    public Image getById(Long id) {
-        return this.imageRepository.findById(id).get();
+    public Image getById(Long imageId) {
+        return this.imageRepository.findById(imageId).get();
     }
 
     // UPDATE
