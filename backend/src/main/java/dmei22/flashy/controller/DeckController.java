@@ -18,14 +18,9 @@ import java.util.List;
 public class DeckController {
 
     private final DeckService deckService;
-    private final ImageService imageService;
 
-    public DeckController(
-            DeckService deckService,
-            ImageService imageService
-    ) {
+    public DeckController(DeckService deckService) {
         this.deckService = deckService;
-        this.imageService = imageService;
     }
 
     // CREATE
