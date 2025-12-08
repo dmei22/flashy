@@ -5,18 +5,19 @@
 		]"
 ></app-breadcrumb>
 
-<app-image-manager [entity]="deck()!"
-				   (updateOutput)="getDeckId()"
-></app-image-manager>
-
 <div class="row">
 	<!--Left: Deck details & actions-->
 	<div class="col-4 g-0">
 		<div class="card">
-			<img class="card-img-top object-fit-cover"
-				 [src]="deck()?.imageUrl ? deck()?.imageUrl : imageService.defaultImageUrl"
-				 [alt]="deck()?.name"
+			<app-image-manager [entity]="deck()!"
+							   (updateOutput)="getDeckId()"
 			>
+				<img class="card-img-top object-fit-cover"
+					 [src]="imageService.getDeckImageUrl(deck()!.id, deck()!.imageVersion)"
+					 [alt]="deck()?.name"
+				>
+			</app-image-manager>
+
 			<div class="card-body">
 				<h1 class="card-title">{{ deck()?.name }}</h1>
 				<p class="card-text">{{ deck()?.description }}</p>

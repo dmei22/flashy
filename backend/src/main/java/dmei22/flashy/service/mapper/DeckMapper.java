@@ -9,17 +9,16 @@ import java.util.List;
 
 public class DeckMapper {
 
-    public static final String BASE_URL = "http://localhost:8080/deck/";
-
     public static DeckOverviewDto toDeckOverviewDto(Deck deck) {
         DeckOverviewDto dto = new DeckOverviewDto();
 
         dto.setId(deck.getId());
         dto.setName(deck.getName());
         dto.setDescription(deck.getDescription());
-        dto.setImageUrl(deck.getImage() == null
+        dto.setImageVersion(deck.getImage() == null
                 ? null
-                : (BASE_URL + deck.getId() + "/image"));
+                : deck.getImage().getUpdateAt().toEpochMilli()
+        );
 
         return dto;
     }
@@ -30,9 +29,10 @@ public class DeckMapper {
         dto.setId(deck.getId());
         dto.setName(deck.getName());
         dto.setDescription(deck.getDescription());
-        dto.setImageUrl(deck.getImage() == null
+        dto.setImageVersion(deck.getImage() == null
                 ? null
-                : (BASE_URL + deck.getId() + "/image"));
+                : deck.getImage().getUpdateAt().toEpochMilli()
+        );
         List<CardOverviewDto> cards = deck
                 .getCards()
                 .stream()

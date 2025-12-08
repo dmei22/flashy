@@ -14,5 +14,5 @@ public class DeckDetailsDto {
     private String name;
     private String description;
     private List<CardOverviewDto> cards;
-    private String imageUrl;
+    private Long imageVersion;
 }

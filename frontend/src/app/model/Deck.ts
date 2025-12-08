@@ -5,7 +5,7 @@ export class DeckOverview {
     public id!: number
     public name!: string
     public description!: string
-    public imageUrl!: string
+    public imageVersion!: number
 
     constructor() {
     }
@@ -16,7 +16,7 @@ export class DeckDetails {
     public name!: string
     public description!: string
     public cards!: CardOverview[]
-    public imageUrl!: string
+    public imageVersion!: number
 
     constructor() {
     }

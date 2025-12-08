@@ -1,18 +1,14 @@
 package dmei22.flashy.service;
 
 import dmei22.flashy.dto.deck.*;
-import dmei22.flashy.model.Card;
 import dmei22.flashy.model.Deck;
 import dmei22.flashy.model.Image;
-import dmei22.flashy.repository.CardRepository;
 import dmei22.flashy.repository.DeckRepository;
-import dmei22.flashy.repository.ImageRepository;
 import dmei22.flashy.service.mapper.DeckMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
