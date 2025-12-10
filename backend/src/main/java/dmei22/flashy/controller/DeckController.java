@@ -1,12 +1,7 @@
 package dmei22.flashy.controller;
 
-import dmei22.flashy.dto.card.CardCreateRequest;
-import dmei22.flashy.dto.card.CardDetailsDto;
-import dmei22.flashy.dto.card.CardUpdateRequest;
 import dmei22.flashy.dto.deck.*;
-import dmei22.flashy.model.Card;
 import dmei22.flashy.model.Image;
-import dmei22.flashy.service.CardService;
 import dmei22.flashy.service.DeckService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
