@@ -12,7 +12,7 @@
 			<app-image-manager [entity]="deck()!"
 							   (updateOutput)="getDeckId()"
 			>
-				<img class="card-img-top object-fit-cover"
+				<img class="card-img-top img-square object-fit-cover"
 					 [src]="imageService.getDeckImageUrl(deck()!.id, deck()!.imageVersion)"
 					 [alt]="deck()?.name"
 				>
@@ -43,7 +43,7 @@
 	<div class="col-8 g-0 ps-5">
 		<ul class="list-group">
 			<li *ngFor="let card of deck()?.cards"
-				 class="list-group-item"
+				 class="list-group-item list-group-item-action"
 				 [routerLink]="['/card', card.id]"
 			>{{ card.front }}</li>
 		</ul>

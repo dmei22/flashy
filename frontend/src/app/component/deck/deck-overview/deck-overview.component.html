@@ -11,9 +11,13 @@
 </div>
 
 <div class="row row-cols-4">
-	<div class="col col-3 g-0" *ngFor="let deck of deckOverviews()">
-		<div class="card" [routerLink]="['/deck', deck.id]">
-			<img class="card-img-top"
+	<div *ngFor="let deck of deckOverviews()"
+		 class="col col-3 g-0 p-3"
+	>
+		<div class="card pointer"
+			 [routerLink]="['/deck', deck.id]"
+		>
+			<img class="card-img-top img-square object-fit-cover"
 				 [src]="imageService.getDeckImageUrl(deck.id, deck.imageVersion)"
 				 [alt]="deck.name"
 			>

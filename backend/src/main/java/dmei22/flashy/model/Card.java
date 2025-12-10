@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,4 +29,10 @@ public class Card {
     @JoinColumn(name = "deck_id")
     @JsonIgnore
     private Deck deck;
+
+    @Enumerated(EnumType.STRING)
+    private Interval interval = Interval.NEW;
+
+    private LocalDate lastReviewDate;
+    private LocalDate nextReviewDate;
 }

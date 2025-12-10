@@ -1,10 +1,13 @@
 package dmei22.flashy.controller;
 
+import dmei22.flashy.dto.card.CardCreateRequest;
+import dmei22.flashy.dto.card.CardDetailsDto;
+import dmei22.flashy.dto.card.CardUpdateRequest;
 import dmei22.flashy.dto.deck.*;
-import dmei22.flashy.model.Deck;
+import dmei22.flashy.model.Card;
 import dmei22.flashy.model.Image;
+import dmei22.flashy.service.CardService;
 import dmei22.flashy.service.DeckService;
-import dmei22.flashy.service.ImageService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,41 +27,43 @@ public class DeckController {
     }
 
     // CREATE
-    @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody DeckCreateRequest request) {
-        DeckOverviewDto response = this.deckService.create(request);
+    @PostMapping
+    public ResponseEntity<?> createDeck(
+            @RequestBody DeckCreateRequest request
+    ) {
+        DeckOverviewDto response = this.deckService.createDeck(request);
 
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/{id}/image")
+    @PostMapping("/{deckId}/image")
     public ResponseEntity<Long> uploadImage(
-            @PathVariable("id") Long id,
+            @PathVariable("deckId") Long deckId,
             @RequestParam MultipartFile file
     ) {
-        Image image = this.deckService.uploadImage(id, file);
+        Image image = this.deckService.uploadImage(deckId, file);
 
         return ResponseEntity.ok(image.getId());
     }
 
     // READ
-    @GetMapping("/find/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") Long id) {
-        DeckDetailsDto response = this.deckService.findById(id);
+    @GetMapping("/find/{deckId}")
+    public ResponseEntity<?> getDeck(@PathVariable("deckId") Long deckId) {
+        DeckDetailsDto response = this.deckService.getDeck(deckId);
 
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> all() {
+    public ResponseEntity<?> getDecks() {
         List<DeckOverviewDto> decks = this.deckService.all();
 
         return ResponseEntity.ok(decks);
     }
 
-    @GetMapping("/{id}/image")
-    public ResponseEntity<?> deckImage(@PathVariable("id") Long deckId) {
-        Image image = this.deckService.deckImage(deckId);
+    @GetMapping("/{deckId}/image")
+    public ResponseEntity<?> getImage(@PathVariable("deckId") Long deckId) {
+        Image image = this.deckService.getImage(deckId);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(image.getFileType()))
@@ -66,16 +71,19 @@ public class DeckController {
     }
 
     // UPDATE
-    @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody DeckUpdateRequest request) {
-        DeckDetailsDto response = this.deckService.update(request);
+    @PutMapping("/{deckId}")
+    public ResponseEntity<?> updateDeck(
+            @PathVariable("deckId") Long deckId,
+            @RequestBody DeckUpdateRequest request
+    ) {
+        DeckDetailsDto response = this.deckService.updateDeck(deckId, request);
 
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}/image")
+    @PutMapping("/{deckId}/image")
     public ResponseEntity<?> updateImage(
-            @PathVariable("id") Long deckId,
+            @PathVariable("deckId") Long deckId,
             @RequestParam MultipartFile file
     ) {
         this.deckService.updateImage(deckId, file);
@@ -84,16 +92,17 @@ public class DeckController {
     }
 
     // DELETE
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable("id") Long id) {
-        this.deckService.deleteById(id);
+    @DeleteMapping("/{deckId}")
+    public ResponseEntity<?> deleteDeck(@PathVariable("deckId") Long id) {
+        this.deckService.deleteDeck(id);
 
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{id}/image")
-    public ResponseEntity<?> deleteImage(@PathVariable("id") Long deckId) {
+    @DeleteMapping("/{deckId}/image")
+    public ResponseEntity<?> deleteImage(@PathVariable("deckId") Long deckId) {
         this.deckService.deleteImage(deckId);
 
-        return ResponseEntity.noContent().build();}
+        return ResponseEntity.noContent().build();
+    }
 }

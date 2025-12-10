@@ -1,8 +1,11 @@
 package dmei22.flashy.service;
 
+import dmei22.flashy.dto.card.CardCreateRequest;
 import dmei22.flashy.dto.deck.*;
+import dmei22.flashy.model.Card;
 import dmei22.flashy.model.Deck;
 import dmei22.flashy.model.Image;
+import dmei22.flashy.repository.CardRepository;
 import dmei22.flashy.repository.DeckRepository;
 import dmei22.flashy.service.mapper.DeckMapper;
 import org.springframework.stereotype.Service;
@@ -16,18 +19,20 @@ import java.util.List;
 public class DeckService {
 
     private final DeckRepository deckRepository;
+    private final CardRepository cardRepository;
     private final ImageService imageService;
 
     public DeckService(
-            DeckRepository deckRepository,
+            DeckRepository deckRepository, CardRepository cardRepository,
             ImageService imageService
     ) {
         this.deckRepository = deckRepository;
+        this.cardRepository = cardRepository;
         this.imageService = imageService;
     }
 
     // CREATE
-    public DeckOverviewDto create(DeckCreateRequest request) {
+    public DeckOverviewDto createDeck(DeckCreateRequest request) {
         Deck deck = new Deck();
 
         deck.setName(request.getName());
@@ -36,8 +41,25 @@ public class DeckService {
         return DeckMapper.toDeckOverviewDto(this.deckRepository.save(deck));
     }
 
-    // TODO: CREATE IMAGE
-    public Image uploadImage(Long deckId, MultipartFile file) {
+    public Card createCard(
+            Long deckId,
+            CardCreateRequest request
+    ) {
+        Deck deck = this.deckRepository.findById(deckId).get();
+        Card card = new Card();
+
+        card.setFront(request.getFront());
+        card.setBack(request.getBack());
+        card.setDeck(deck);
+        deck.getCards().add(card);
+
+        return card;
+    }
+
+    public Image uploadImage(
+            Long deckId,
+            MultipartFile file
+    ) {
         Image image = this.imageService.upload(file);
         Deck deck = this.deckRepository.findById(deckId).get();
 
@@ -48,7 +70,7 @@ public class DeckService {
     }
 
     // READ
-    public DeckDetailsDto findById(Long id) {
+    public DeckDetailsDto getDeck(Long id) {
         Deck deck = this.deckRepository.findById(id).get();
 
         return DeckMapper.toDeckDetailsDto(deck);
@@ -63,7 +85,7 @@ public class DeckService {
         return decks;
     }
 
-    public Image deckImage(Long deckId) {
+    public Image getImage(Long deckId) {
         Deck deck = this.deckRepository.findById(deckId).get();
         Image image = deck.getImage();
 
@@ -71,8 +93,8 @@ public class DeckService {
     }
 
     // UPDATE
-    public DeckDetailsDto update(DeckUpdateRequest request) {
-        Deck deck = this.deckRepository.findById(request.getDeckId()).get();
+    public DeckDetailsDto updateDeck(Long deckId, DeckUpdateRequest request) {
+        Deck deck = this.deckRepository.findById(deckId).get();
 
         deck.setName(request.getName());
         deck.setDescription(request.getDescription());
@@ -80,7 +102,10 @@ public class DeckService {
         return DeckMapper.toDeckDetailsDto(this.deckRepository.save(deck));
     }
 
-    public void updateImage(Long deckId, MultipartFile file) {
+    public void updateImage(
+            Long deckId,
+            MultipartFile file
+    ) {
         Deck deck = this.deckRepository.findById(deckId).get();
         Image image = this.imageService.update(deck.getImage().getId(), file);
 
@@ -90,7 +115,7 @@ public class DeckService {
     }
 
     // DELETE
-    public void deleteById(Long id) {
+    public void deleteDeck(Long id) {
         this.deckRepository.deleteById(id);
     }
 
@@ -100,5 +125,9 @@ public class DeckService {
         deck.setImage(null);
 
         this.deckRepository.save(deck);
+    }
+
+    public void deleteCard(Long cardIid) {
+        this.cardRepository.deleteById(cardIid);
     }
 }

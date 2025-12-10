@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CardUpdateRequest {
-    private Long cardId;
     private String front;
     private String back;
 }
