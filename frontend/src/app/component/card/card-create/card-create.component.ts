@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {CardService} from "../../../service/card.service";
 import {CardOverview} from "../../../model/Card";
 import {Router} from "@angular/router";
+import {DeckService} from "../../../service/deck.service";
 
 @Component({
   selector: 'app-card-create',
@@ -14,7 +15,7 @@ import {Router} from "@angular/router";
 })
 export class CardCreateComponent implements OnInit {
 
-  private cardService = inject(CardService);
+  private deckService = inject(DeckService);
   private formBuilder = inject(FormBuilder);
   private router = inject(Router);
 
@@ -38,10 +39,10 @@ export class CardCreateComponent implements OnInit {
     console.log("Sending Card create request:");
     console.log(this.cardCreateForm.value);
 
-    this.cardService.create(this.cardCreateForm.value).subscribe({
+    this.deckService.createCard(this.deckId(), this.cardCreateForm.value).subscribe({
       next: (response: CardOverview) => {
         console.log("Create Card success");
-        this.router.navigate(["card", response.id]);
+        this.router.navigate(["deck", this.deckId(), "card", response.id]);
       },
       error: (error) => {
         console.log("Failed to Create Card");

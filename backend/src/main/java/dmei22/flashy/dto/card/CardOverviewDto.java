@@ -7,4 +7,5 @@ public class CardOverviewDto {
     private Long id;
     private String front;
     private String back;
+    private boolean due;
 }

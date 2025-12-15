@@ -1,5 +1,3 @@
-export interface Review {
-    id: number
-    reviewDate: string
+export interface ReviewCreateRequest {
     success: boolean
 }

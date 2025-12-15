@@ -1,43 +1,38 @@
 package dmei22.flashy.controller;
 
-import dmei22.flashy.dto.card.CardCreateRequest;
 import dmei22.flashy.dto.card.CardDetailsDto;
 import dmei22.flashy.dto.card.CardUpdateRequest;
-import dmei22.flashy.model.Card;
+import dmei22.flashy.dto.review.ReviewCreateRequest;
 import dmei22.flashy.service.CardService;
-import dmei22.flashy.service.DeckService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/deck/{deckId}/card")
+@RequestMapping("/card/{cardId}")
 @CrossOrigin("http://localhost:4200/")
 public class CardController {
 
     private final CardService cardService;
-    private final DeckService deckService;
 
     public CardController(
-            CardService cardService,
-            DeckService deckService
+            CardService cardService
     ) {
         this.cardService = cardService;
-        this.deckService = deckService;
     }
 
     // CREATE
-    @PostMapping
-    public ResponseEntity<?> createCard(
-            @PathVariable("deckId") Long deckId,
-            @RequestBody CardCreateRequest request
+    @PostMapping("/review")
+    public ResponseEntity<?> createReview(
+            @PathVariable("cardId") Long cardId,
+            @RequestBody ReviewCreateRequest request
     ) {
-        Card response = this.deckService.createCard(deckId, request);
+        this.cardService.createReview(cardId, request);
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.noContent().build();
     }
 
     // READ
-    @GetMapping("/{cardId}")
+    @GetMapping
     public ResponseEntity<?> getCard(@PathVariable("cardId") Long cardId) {
         CardDetailsDto response = this.cardService.getCard(cardId);
 
@@ -45,10 +40,10 @@ public class CardController {
     }
 
     // UPDATE
-    @PutMapping("/{cardId}")
+    @PutMapping
     public ResponseEntity<?> updateCard(
             @PathVariable("cardId") Long cardId,
-            @RequestBody CardUpdateRequest request // TODO: adjust request
+            @RequestBody CardUpdateRequest request
     ) {
         CardDetailsDto response = this.cardService.updateCard(cardId, request);
 
@@ -56,12 +51,5 @@ public class CardController {
     }
 
     // DELETE
-    @DeleteMapping("/{cardId}")
-    public ResponseEntity<?> deleteCard(
-            @PathVariable("cardId") Long cardId
-    ) {
-        this.deckService.deleteCard(cardId);
 
-        return ResponseEntity.noContent().build();
-    }
 }

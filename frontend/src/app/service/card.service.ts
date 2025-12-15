@@ -1,7 +1,8 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Card, CardCreateRequest, CardDetails, CardOverview, CardUpdateRequest} from "../model/Card";
+import {CardCreateRequest, CardDetails, CardOverview, CardUpdateRequest} from "../model/Card";
+import {ReviewCreateRequest} from "../model/Review";
 
 @Injectable({
   providedIn: 'root'
@@ -9,31 +10,25 @@ import {Card, CardCreateRequest, CardDetails, CardOverview, CardUpdateRequest} f
 export class CardService {
 
   private http = inject(HttpClient);
-  private baseUrl = "http://localhost:8080"
+  private requestMapping = "http://localhost:8080/card"
 
   constructor() { }
 
   // CREATE
-  public create(request: CardCreateRequest): Observable<CardOverview> {
-    return this.http.post<CardOverview>(`${this.baseUrl}/card/create`, request);
+  public createReview(cardId: number, request: ReviewCreateRequest): Observable<void> {
+    return this.http.post<void>(`${this.requestMapping}/review`, request);
   }
 
   // READ
-  public getAll(): Observable<Card[]> {
-    return this.http.get<Card[]>(this.baseUrl + "/card/all");
-  }
-
-  public getById(id: number): Observable<CardDetails> {
-    return this.http.get<CardDetails>(`${this.baseUrl}/card/find/${id}`);
+  public getCard(cardId: number): Observable<CardDetails> {
+    return this.http.get<CardDetails>(`${this.requestMapping}/${cardId}`);
   }
 
   // UPDATE
-  public update(request: CardUpdateRequest): Observable<CardDetails> {
-    return this.http.put<CardDetails>(`${this.baseUrl}/card/update`, request);
+  public update(cardId: number, request: CardUpdateRequest): Observable<CardDetails> {
+    return this.http.put<CardDetails>(`${this.requestMapping}/${cardId}`, request);
   }
 
   // DELETE
-  public deleteById(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/card/delete/${id}`);
-  }
+
 }

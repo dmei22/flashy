@@ -1,6 +1,10 @@
 package dmei22.flashy.model;
 
-public enum Interval {
+
+import lombok.Getter;
+
+@Getter
+public enum Level {
     NEW(0),        // created
     ONE(1),        // 1 day
     TWO(3),        // 3 days
@@ -11,15 +15,11 @@ public enum Interval {
 
     private final int days;
 
-    Interval(int days) {
+    Level(int days) {
         this.days = days;
     }
 
-    public int getDays() {
-        return this.days;
-    }
-
-    public Interval next() {
+    public Level next() {
         return switch (this) {
             case NEW -> ONE;
             case ONE -> TWO;

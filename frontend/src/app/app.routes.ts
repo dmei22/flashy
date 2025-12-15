@@ -8,7 +8,7 @@ export const routes: Routes = [
     { path: "decks", component: DeckOverviewComponent, title: "All Decks" },
     { path: "deck/:id", component: DeckDetailsComponent, title: "Decks Details" },
 
-    { path: "card/:id", component: CardDetailsComponent, title: "Card Details" },
+    { path: "deck/:deckId/card/:cardId", component: CardDetailsComponent, title: "Card Details" },
 
     { path: "image", component: ImageManagerComponent, title: "Image Upload" },
 ];

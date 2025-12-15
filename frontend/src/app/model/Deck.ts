@@ -29,7 +29,6 @@ export interface DeckCreateRequest {
 }
 
 export interface DeckUpdateRequest {
-    id: number
     name: string
     description: string
 }

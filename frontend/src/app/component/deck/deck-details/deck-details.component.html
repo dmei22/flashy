@@ -43,9 +43,12 @@
 	<div class="col-8 g-0 ps-5">
 		<ul class="list-group">
 			<li *ngFor="let card of deck()?.cards"
-				 class="list-group-item list-group-item-action"
-				 [routerLink]="['/card', card.id]"
-			>{{ card.front }}</li>
+				 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+				 [routerLink]="['/deck', deck()?.id, 'card', card.id]"
+			>
+				{{ card.front }}
+				<span *ngIf="card.due" class="badge text-bg-primary rounded-pill">due</span>
+			</li>
 		</ul>
 	</div>
 </div>

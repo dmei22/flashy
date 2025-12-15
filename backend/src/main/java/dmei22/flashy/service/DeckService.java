@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -51,6 +52,8 @@ public class DeckService {
         card.setFront(request.getFront());
         card.setBack(request.getBack());
         card.setDeck(deck);
+        card.setLastReviewDate(LocalDate.now());
+        card.setDueDate(LocalDate.now());
         deck.getCards().add(card);
 
         return card;
@@ -70,8 +73,8 @@ public class DeckService {
     }
 
     // READ
-    public DeckDetailsDto getDeck(Long id) {
-        Deck deck = this.deckRepository.findById(id).get();
+    public DeckDetailsDto getDeck(Long deckId) {
+        Deck deck = this.deckRepository.findById(deckId).get();
 
         return DeckMapper.toDeckDetailsDto(deck);
     }
@@ -127,7 +130,10 @@ public class DeckService {
         this.deckRepository.save(deck);
     }
 
-    public void deleteCard(Long cardIid) {
+    public void deleteCard(Long deckId, Long cardIid) {
+        Deck deck = this.deckRepository.findById(deckId).get();
+        Card card = this.cardRepository.findById(cardIid).get();
+        deck.getCards().remove(card);
         this.cardRepository.deleteById(cardIid);
     }
 }

@@ -27,7 +27,7 @@ export class DeckCreateComponent implements OnInit {
   protected onSubmit(): void {
     document.getElementById("deck-create-modal-close")?.click();
 
-    this.deckService.create(this.deckForm.value).subscribe({
+    this.deckService.createDeck(this.deckForm.value).subscribe({
       next: (response: DeckOverview) => {
         this.router.navigate(["deck/", response.id]);
       },

@@ -5,6 +5,7 @@ import {CardDetails} from "../../../model/Card";
 import {CardFaceComponent} from "./card-face/card-face.component";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {BreadcrumbComponent} from "../../breadcrumb/breadcrumb.component";
+import {DeckService} from "../../../service/deck.service";
 
 @Component({
   selector: 'app-card-details',
@@ -19,31 +20,33 @@ import {BreadcrumbComponent} from "../../breadcrumb/breadcrumb.component";
 export class CardDetailsComponent implements OnInit {
 
   private cardService = inject(CardService);
+  private deckService = inject(DeckService);
   private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
   private formBuilder = inject(FormBuilder);
 
+  protected deckId = signal<number | null>(null);
+  protected cardId = signal<number | null>(null);
   protected cardDetails = signal<CardDetails | null>(null);
   protected cardUpdateForm!: FormGroup;
 
   ngOnInit() {
-    this.getCardId();
+    this.getParams();
+    this.getCard(this.cardId()!);
   }
 
-  private getCardId(): void {
-    const cardId = Number(this.activatedRoute.snapshot.paramMap.get("id"));
-    this.getCard(cardId);
+  private getParams(): void {
+    this.cardId.set(Number(this.activatedRoute.snapshot.paramMap.get("cardId")));
+    this.deckId.set(Number(this.activatedRoute.snapshot.paramMap.get("deckId")));
   }
 
   private getCard(id: number): void {
-    this.cardService.getById(id).subscribe({
+    this.cardService.getCard(id).subscribe({
       next: (response: CardDetails) => {
-        console.log("Retrieved Card with id: " + response.id);
         this.cardDetails.set(response);
         this.buildCardUpdateForm();
       },
       error: (error) => {
-        console.log("Failed to retrieve Card");
         console.log(error);
       }
     });
@@ -51,7 +54,6 @@ export class CardDetailsComponent implements OnInit {
 
   private buildCardUpdateForm(): void {
     this.cardUpdateForm = this.formBuilder.group({
-      cardId: this.cardDetails()?.id,
       front: this.cardDetails()?.front,
       back: this.cardDetails()?.back,
     });
@@ -60,26 +62,22 @@ export class CardDetailsComponent implements OnInit {
   protected onUpdate(): void {
     document.getElementById("card-update-modal-close")?.click();
 
-    this.cardService.update(this.cardUpdateForm.value).subscribe({
+    this.cardService.update(this.cardId()!, this.cardUpdateForm.value).subscribe({
       next: (response: CardDetails) => {
-        console.log("Update Card success");
         this.cardDetails.set(response);
       },
       error: (error) => {
-        console.log("Failed to update Card");
         console.log(error);
       }
     })
   }
 
   protected onDelete(): void {
-    this.cardService.deleteById(this.cardDetails()!.id).subscribe({
+    this.deckService.deleteCard(this.deckId()!, this.cardDetails()!.id).subscribe({
       next: () => {
-        console.log("Delete Card success");
-        this.router.navigate(["/deck", this.cardDetails()?.deckId]);
+        this.router.navigate(["/deck", this.deckId()]);
       },
       error: (error) => {
-        console.log("Failed to delete Card");
         console.log(error);
       }
     });

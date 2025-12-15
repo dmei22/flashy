@@ -31,8 +31,8 @@ public class Card {
     private Deck deck;
 
     @Enumerated(EnumType.STRING)
-    private Interval interval = Interval.NEW;
+    private Level level = Level.NEW;
 
     private LocalDate lastReviewDate;
-    private LocalDate nextReviewDate;
+    private LocalDate dueDate;
 }

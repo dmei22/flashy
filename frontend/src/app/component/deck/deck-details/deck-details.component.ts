@@ -2,7 +2,7 @@ import {Component, inject, OnInit, signal} from '@angular/core';
 import {DeckService} from "../../../service/deck.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {DeckDetails} from "../../../model/Deck";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {CardCreateComponent} from "../../card/card-create/card-create.component";
 import {BreadcrumbComponent} from "../../breadcrumb/breadcrumb.component";
@@ -18,6 +18,7 @@ import {ImageService} from "../../../service/image.service";
     RouterLink,
     BreadcrumbComponent,
     ImageManagerComponent,
+    NgIf,
   ],
   templateUrl: './deck-details.component.html',
   styleUrl: './deck-details.component.css'
@@ -45,7 +46,7 @@ export class DeckDetailsComponent implements OnInit {
   protected onEdit(): void {
     document.getElementById("deck-edit-modal-close")?.click();
 
-    this.deckService.update(this.deckEditForm.value).subscribe({
+    this.deckService.updateDeck(this.deckEditForm.value).subscribe({
       next: (response: DeckDetails) => {
         this.deck.set(response);
       },
@@ -56,7 +57,7 @@ export class DeckDetailsComponent implements OnInit {
   }
 
   protected onDelete(): void {
-    this.deckService.deleteById(this.deck()!.id).subscribe({
+    this.deckService.deleteDeck(this.deck()!.id).subscribe({
       next: response => {
         this.route.navigate(["/decks"])
       },
@@ -67,8 +68,8 @@ export class DeckDetailsComponent implements OnInit {
   }
 
   // Helper methods
-  private getDeckById(id: number): void {
-    this.deckService.getById(id).subscribe({
+  private getDeckById(deckId: number): void {
+    this.deckService.getDeck(deckId).subscribe({
       next: (response: DeckDetails) => {
         this.deck.set(response);
         this.buildDeckEditForm();

@@ -1,6 +1,8 @@
 package dmei22.flashy.controller;
 
+import dmei22.flashy.dto.card.CardCreateRequest;
 import dmei22.flashy.dto.deck.*;
+import dmei22.flashy.model.Card;
 import dmei22.flashy.model.Image;
 import dmei22.flashy.service.DeckService;
 import org.springframework.http.MediaType;
@@ -31,6 +33,16 @@ public class DeckController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/{deckId}/card")
+    public ResponseEntity<?> createCard(
+            @PathVariable("deckId") Long deckId,
+            @RequestBody CardCreateRequest request
+    ) {
+        Card response = this.deckService.createCard(deckId, request);
+
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("/{deckId}/image")
     public ResponseEntity<Long> uploadImage(
             @PathVariable("deckId") Long deckId,
@@ -42,7 +54,7 @@ public class DeckController {
     }
 
     // READ
-    @GetMapping("/find/{deckId}")
+    @GetMapping("/{deckId}")
     public ResponseEntity<?> getDeck(@PathVariable("deckId") Long deckId) {
         DeckDetailsDto response = this.deckService.getDeck(deckId);
 
@@ -90,6 +102,16 @@ public class DeckController {
     @DeleteMapping("/{deckId}")
     public ResponseEntity<?> deleteDeck(@PathVariable("deckId") Long id) {
         this.deckService.deleteDeck(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{deckId}/card/{cardId}")
+    public ResponseEntity<?> deleteCard(
+            @PathVariable("deckId") Long deckId,
+            @PathVariable("cardId") Long cardId
+    ) {
+        this.deckService.deleteCard(deckId, cardId);
 
         return ResponseEntity.noContent().build();
     }

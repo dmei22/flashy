@@ -1,7 +1,7 @@
 <app-breadcrumb [items]="[
 			{ label: 'Home', routerLink: '/'},
 			{ label: 'Decks', routerLink: '/decks'},
-			{ label: 'Deck Details', routerLink: '/deck/' + cardDetails()?.deckId },
+			{ label: 'Deck Details', routerLink: '/deck/' + deckId() },
 			{ label: 'Card Details', routerLink: '' },
 		]"
 ></app-breadcrumb>
@@ -45,7 +45,6 @@
 			</div>
 			<div class="modal-body">
 				<form [formGroup]="cardUpdateForm">
-					<input formControlName="cardId" hidden>
 					<div>
 						<label class="form-label">Front side</label>
 						<textarea class="form-control"

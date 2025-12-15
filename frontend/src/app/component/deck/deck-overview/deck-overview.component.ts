@@ -29,7 +29,7 @@ export class DeckOverviewComponent implements OnInit {
   }
 
   private getAllDecks(): void {
-    this.deckService.getAll().subscribe({
+    this.deckService.getDecks().subscribe({
       next: (response: DeckOverview[]) => {
         this.deckOverviews.set(response);
       },
