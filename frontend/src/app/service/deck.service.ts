@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {DeckCreateRequest, DeckDetails, DeckOverview, DeckUpdateRequest} from "../model/Deck";
-import {CardCreateRequest, CardOverview} from "../model/Card";
+import {CardCreateRequest, CardDetails, CardOverview} from "../model/Card";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,10 @@ export class DeckService {
             deckOverview => Object.assign(new DeckOverview(), deckOverview))
         )
     );
+  }
+
+  public getCardsDue(deckId: number): Observable<CardDetails[]> {
+    return this.http.get<CardDetails[]>(`${this.requestMapping}/${deckId}/card/due`);
   }
 
   public getDeck(deckId: number): Observable<DeckDetails> {

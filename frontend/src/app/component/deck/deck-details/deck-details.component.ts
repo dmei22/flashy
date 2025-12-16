@@ -39,7 +39,7 @@ export class DeckDetailsComponent implements OnInit {
   }
 
   protected getDeckId(): void {
-    const id: number = Number(this.activatedRoute.snapshot.paramMap.get("id"));
+    const id: number = Number(this.activatedRoute.snapshot.paramMap.get("deckId"));
     this.getDeckById(id);
   }
 

@@ -12,7 +12,7 @@ import {DeckService} from "../../../service/deck.service";
   imports: [
     CardFaceComponent,
     ReactiveFormsModule,
-    BreadcrumbComponent
+    BreadcrumbComponent,
   ],
   templateUrl: './card-details.component.html',
   styleUrl: './card-details.component.css'
@@ -32,37 +32,14 @@ export class CardDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.getParams();
+    this.buildCardUpdateForm();
     this.getCard(this.cardId()!);
-  }
-
-  private getParams(): void {
-    this.cardId.set(Number(this.activatedRoute.snapshot.paramMap.get("cardId")));
-    this.deckId.set(Number(this.activatedRoute.snapshot.paramMap.get("deckId")));
-  }
-
-  private getCard(id: number): void {
-    this.cardService.getCard(id).subscribe({
-      next: (response: CardDetails) => {
-        this.cardDetails.set(response);
-        this.buildCardUpdateForm();
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
-  }
-
-  private buildCardUpdateForm(): void {
-    this.cardUpdateForm = this.formBuilder.group({
-      front: this.cardDetails()?.front,
-      back: this.cardDetails()?.back,
-    });
   }
 
   protected onUpdate(): void {
     document.getElementById("card-update-modal-close")?.click();
 
-    this.cardService.update(this.cardId()!, this.cardUpdateForm.value).subscribe({
+    this.cardService.updateCard(this.cardId()!, this.cardUpdateForm.value).subscribe({
       next: (response: CardDetails) => {
         this.cardDetails.set(response);
       },
@@ -80,6 +57,38 @@ export class CardDetailsComponent implements OnInit {
       error: (error) => {
         console.log(error);
       }
+    });
+  }
+
+  // Helper methods
+  private getParams(): void {
+    this.cardId.set(Number(this.activatedRoute.snapshot.paramMap.get("cardId")));
+    this.deckId.set(Number(this.activatedRoute.snapshot.paramMap.get("deckId")));
+  }
+
+  private getCard(id: number): void {
+    this.cardService.getCard(id).subscribe({
+      next: (response: CardDetails) => {
+        this.cardDetails.set(response);
+        this.patchCardUpdateForm();
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
+
+  private buildCardUpdateForm(): void {
+    this.cardUpdateForm = this.formBuilder.group({
+      front: this.cardDetails()?.front,
+      back: this.cardDetails()?.back,
+    });
+  }
+
+  private patchCardUpdateForm(): void {
+    this.cardUpdateForm.patchValue({
+      front: this.cardDetails()?.front,
+      back: this.cardDetails()?.back,
     });
   }
 }

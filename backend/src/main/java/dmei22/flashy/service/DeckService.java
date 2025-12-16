@@ -1,19 +1,23 @@
 package dmei22.flashy.service;
 
 import dmei22.flashy.dto.card.CardCreateRequest;
+import dmei22.flashy.dto.card.CardDetailsDto;
 import dmei22.flashy.dto.deck.*;
 import dmei22.flashy.model.Card;
 import dmei22.flashy.model.Deck;
 import dmei22.flashy.model.Image;
 import dmei22.flashy.repository.CardRepository;
 import dmei22.flashy.repository.DeckRepository;
+import dmei22.flashy.service.mapper.CardMapper;
 import dmei22.flashy.service.mapper.DeckMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -93,6 +97,18 @@ public class DeckService {
         Image image = deck.getImage();
 
         return image;
+    }
+
+    public List<CardDetailsDto> getCardsDue(Long deckId) {
+        Deck deck = this.deckRepository.findById(deckId).get();
+        LocalDate today = LocalDate.now();
+
+        List<CardDetailsDto> cards = deck.getCards().stream()
+                .filter(card -> today.isBefore(card.getDueDate()))
+                .map(CardMapper::toCardDetailsDto)
+                .toList();
+
+        return cards;
     }
 
     // UPDATE

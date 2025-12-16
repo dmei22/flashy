@@ -25,7 +25,7 @@ export class CardService {
   }
 
   // UPDATE
-  public update(cardId: number, request: CardUpdateRequest): Observable<CardDetails> {
+  public updateCard(cardId: number, request: CardUpdateRequest): Observable<CardDetails> {
     return this.http.put<CardDetails>(`${this.requestMapping}/${cardId}`, request);
   }
 

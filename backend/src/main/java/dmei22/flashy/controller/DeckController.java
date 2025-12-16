@@ -1,6 +1,7 @@
 package dmei22.flashy.controller;
 
 import dmei22.flashy.dto.card.CardCreateRequest;
+import dmei22.flashy.dto.card.CardDetailsDto;
 import dmei22.flashy.dto.deck.*;
 import dmei22.flashy.model.Card;
 import dmei22.flashy.model.Image;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/deck")
@@ -75,6 +77,13 @@ public class DeckController {
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(image.getFileType()))
                 .body(image.getBytes());
+    }
+
+    @GetMapping("/{deckId}/card/due")
+    public ResponseEntity<?> getCardsDue(@PathVariable("deckId") Long deckId) {
+        List<CardDetailsDto> cards = this.deckService.getCardsDue(deckId);
+
+        return ResponseEntity.ok(cards);
     }
 
     // UPDATE
