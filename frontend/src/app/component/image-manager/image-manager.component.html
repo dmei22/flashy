@@ -1,0 +1,35 @@
+<div class=""
+	 data-bs-toggle="modal"
+	 data-bs-target="#image-upload-modal"
+>
+	<ng-content></ng-content>
+</div>
+
+<div class="modal fade" id="image-upload-modal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1>Edit Image</h1>
+				<button type="button"
+						class="btn-close"
+						data-bs-dismiss="modal"
+						id="image-upload-modal-close"
+				></button>
+			</div>
+			<div class="modal-body">
+				<input class="form-control mb-2"
+					   type="file"
+					   (change)="onFileSelected($event)">
+
+				<button class="btn btn-primary me-2"
+						type="button"
+						(click)="save()"
+				>Save</button>
+				<button class="btn btn-outline-danger"
+						type="button"
+						(click)="deleteCurrent()"
+				>Delete current Image</button>
+			</div>
+		</div>
+	</div>
+</div>
