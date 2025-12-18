@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import {DeckOverviewComponent} from "./component/deck/deck-overview/deck-overview.component";
 import {DeckDetailsComponent} from "./component/deck/deck-details/deck-details.component";
 import {CardDetailsComponent} from "./component/card/card-details/card-details.component";
-import {ImageManagerComponent} from "./component/image-manager/image-manager.component";
+import {ImageManagerComponent} from "./component/ui/image-manager/image-manager.component";
 import {ReviewComponent} from "./component/review/review.component";
 
 export const routes: Routes = [

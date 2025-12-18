@@ -1,7 +1,22 @@
+:root {
+    --color-outer-space: #28373b;
+    --color-white: #fefefe;
+    --color-hot-cinnamon: #e26119;
+}
+
 .pointer {
     cursor: pointer;
 }
 
 .img-square {
     aspect-ratio: 1/1;
+}
+
+.card {
+    border: 0;
+}
+
+.button-row {
+    display: inline-flex;
+    gap: 0.5rem;
 }

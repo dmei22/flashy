@@ -5,12 +5,14 @@ import dmei22.flashy.dto.deck.DeckDetailsDto;
 import dmei22.flashy.dto.deck.DeckOverviewDto;
 import dmei22.flashy.model.Deck;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class DeckMapper {
 
     public static DeckOverviewDto toDeckOverviewDto(Deck deck) {
         DeckOverviewDto dto = new DeckOverviewDto();
+        LocalDate today = LocalDate.now();
 
         dto.setId(deck.getId());
         dto.setName(deck.getName());
@@ -18,6 +20,11 @@ public class DeckMapper {
         dto.setImageVersion(deck.getImage() == null
                 ? null
                 : deck.getImage().getUpdateAt().toEpochMilli()
+        );
+        dto.setCardsDue(deck.getCards()
+                .stream()
+                .filter(card -> today.isAfter(card.getDueDate()))
+                .toList().size()
         );
 
         return dto;

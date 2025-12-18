@@ -12,17 +12,22 @@
 
 <div class="row row-cols-4">
 	<div *ngFor="let deck of deckOverviews()"
-		 class="col col-3 g-0 p-3"
+		 class="col col-3 g-0 p-3 pb-4"
 	>
 		<div class="card pointer"
 			 [routerLink]="['/deck', deck.id]"
 		>
-			<img class="card-img-top img-square object-fit-cover"
-				 [src]="imageService.getDeckImageUrl(deck.id, deck.imageVersion)"
-				 [alt]="deck.name"
-			>
+			<div class="position-relative">
+				<img class="card-img-top img-square object-fit-cover rounded border shadow"
+					 [src]="imageService.getDeckImageUrl(deck.id, deck.imageVersion)"
+					 [alt]="deck.name"
+				>
+				<div class="card-img-overlay d-flex justify-content-end align-items-end">
+					<span *ngIf="deck.cardsDue" class="badge text-bg-primary rounded-pill">{{ deck.cardsDue }}</span>
+				</div>
+			</div>
 			<div class="card-body">
-				<h5 class="card-title">{{ deck.name }}</h5>
+				<h5 class="card-title text-truncate">{{ deck.name }}</h5>
 				<p class="card-subtitle text-body-secondary text-truncate">{{ deck.description }}</p>
 			</div>
 		</div>

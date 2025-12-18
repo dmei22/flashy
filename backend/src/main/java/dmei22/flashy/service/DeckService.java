@@ -104,7 +104,7 @@ public class DeckService {
         LocalDate today = LocalDate.now();
 
         List<CardDetailsDto> cards = deck.getCards().stream()
-                .filter(card -> today.isBefore(card.getDueDate()))
+                .filter(card -> today.isAfter(card.getDueDate()))
                 .map(CardMapper::toCardDetailsDto)
                 .toList();
 

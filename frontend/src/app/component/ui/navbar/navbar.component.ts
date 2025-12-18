@@ -6,7 +6,7 @@ import {NgForOf} from "@angular/common";
   selector: 'app-navbar',
     imports: [
         RouterLink,
-        NgForOf
+        NgForOf,
     ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'

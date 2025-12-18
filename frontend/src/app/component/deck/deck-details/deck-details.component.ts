@@ -5,8 +5,8 @@ import {DeckDetails} from "../../../model/Deck";
 import {NgForOf, NgIf} from "@angular/common";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {CardCreateComponent} from "../../card/card-create/card-create.component";
-import {BreadcrumbComponent} from "../../breadcrumb/breadcrumb.component";
-import {ImageManagerComponent} from "../../image-manager/image-manager.component";
+import {BreadcrumbComponent} from "../../ui/breadcrumb/breadcrumb.component";
+import {ImageManagerComponent} from "../../ui/image-manager/image-manager.component";
 import {ImageService} from "../../../service/image.service";
 
 @Component({
@@ -46,7 +46,7 @@ export class DeckDetailsComponent implements OnInit {
   protected onEdit(): void {
     document.getElementById("deck-edit-modal-close")?.click();
 
-    this.deckService.updateDeck(this.deckEditForm.value).subscribe({
+    this.deckService.updateDeck(this.deck()!.id, this.deckEditForm.value).subscribe({
       next: (response: DeckDetails) => {
         this.deck.set(response);
       },

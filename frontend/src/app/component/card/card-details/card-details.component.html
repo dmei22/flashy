@@ -6,13 +6,13 @@
 		]"
 ></app-breadcrumb>
 
-<div class="row row-cols-2 g-0">
-	<div class="col-6 g-0 pe-3">
+<div class="row row-cols-2 g-0 d-flex justify-content-evenly">
+	<div class="col-5 g-0">
 		<app-card-face [label]="'Front Side'"
 					   [body]=cardDetails()?.front
 		></app-card-face>
 	</div>
-	<div class="col-6 g-0 ps-3">
+	<div class="col-5 g-0">
 		<app-card-face [label]="'Back Side'"
 					   [body]=cardDetails()?.back
 		></app-card-face>

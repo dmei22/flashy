@@ -10,4 +10,5 @@ public class DeckOverviewDto {
     private String name;
     private String description;
     private Long imageVersion;
+    private int cardsDue;
 }

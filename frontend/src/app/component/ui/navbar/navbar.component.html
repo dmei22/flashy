@@ -1,0 +1,12 @@
+<div class="navbar-container shadow">
+	<nav class="navbar">
+		<div class="container-fluid gap-1 justify-content-start">
+			<span class="badge text-bg-primary fs-6">f</span>
+			<a class="btn fw-bold">flashy</a>
+			<a class="btn"
+			   *ngFor="let item of navItems()"
+			   routerLink="{{ item.routerLink }}"
+			>{{ item.label }}</a>
+		</div>
+	</nav>
+</div>

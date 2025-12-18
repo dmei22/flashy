@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CardDetails} from "../../../model/Card";
 import {CardFaceComponent} from "./card-face/card-face.component";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {BreadcrumbComponent} from "../../breadcrumb/breadcrumb.component";
+import {BreadcrumbComponent} from "../../ui/breadcrumb/breadcrumb.component";
 import {DeckService} from "../../../service/deck.service";
 
 @Component({

@@ -1,5 +1,5 @@
 import {Component, input} from '@angular/core';
-import {BreadCrumbItem} from "../../model/BreadCrumbItem";
+import {BreadCrumbItem} from "../../../model/BreadCrumbItem";
 import {NgForOf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 

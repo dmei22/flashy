@@ -16,7 +16,7 @@ export class CardService {
 
   // CREATE
   public createReview(cardId: number, request: ReviewCreateRequest): Observable<void> {
-    return this.http.post<void>(`${this.requestMapping}/review`, request);
+    return this.http.post<void>(`${this.requestMapping}/${cardId}/review`, request);
   }
 
   // READ

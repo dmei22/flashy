@@ -1,7 +1,7 @@
 import {Component, effect, inject, input, OnInit, output} from '@angular/core';
 import {ReactiveFormsModule} from "@angular/forms";
-import {DeckDetails} from "../../model/Deck";
-import {ImageService} from "../../service/image.service";
+import {DeckDetails} from "../../../model/Deck";
+import {ImageService} from "../../../service/image.service";
 
 @Component({
   selector: 'app-image-manager',

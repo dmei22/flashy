@@ -1,0 +1,39 @@
+<app-breadcrumb [items]="[
+			{ label: 'Home', routerLink: '/'},
+			{ label: 'Decks', routerLink: '/decks'},
+			{ label: 'Deck Details', routerLink: '/deck/' + deckId() },
+			{ label: 'Deck Details', routerLink: '/deck/' + deckId() + '/review' },
+		]"
+></app-breadcrumb>
+
+<div class="row row-cols-2 g-0 d-flex justify-content-evenly">
+	<div class="col-5 g-0">
+		<app-card-face [label]="'Front Side'"
+					   [body]=currentCard()?.front
+		></app-card-face>
+	</div>
+	<div *ngIf="cardBackVisible()" class="col-5 g-0">
+		<app-card-face [label]="'Back Side'"
+					   [body]=currentCard()?.back
+		></app-card-face>
+	</div>
+</div>
+
+<div class="button-row">
+	<button *ngIf="!cardBackVisible()"
+			type="button"
+			class="btn btn-primary"
+			(click)="toggleCardBackVisible()"
+	>Show answer</button>
+
+	<button *ngIf="cardBackVisible()"
+			type="button"
+			class="btn btn-success"
+			(click)="onNext(currentCard()!.id, true)"
+	>Success</button>
+	<button *ngIf="cardBackVisible()"
+			type="button"
+			class="btn btn-light"
+			(click)="onNext(currentCard()!.id, false)"
+	>Repeat</button>
+</div>

@@ -5,10 +5,17 @@ import {DeckService} from "../../service/deck.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReviewCreateRequest} from "../../model/Review";
 import {concatMap, map, Observable, of, tap} from "rxjs";
+import {CardFaceComponent} from "../card/card-details/card-face/card-face.component";
+import {NgIf} from "@angular/common";
+import {BreadcrumbComponent} from "../ui/breadcrumb/breadcrumb.component";
 
 @Component({
   selector: 'app-review',
-  imports: [],
+  imports: [
+    CardFaceComponent,
+    NgIf,
+    BreadcrumbComponent
+  ],
   templateUrl: './review.component.html',
   styleUrl: './review.component.css'
 })
@@ -28,6 +35,7 @@ export class ReviewComponent implements OnInit {
 
     return cards?.at(index) ?? null;
   });
+  protected cardBackVisible = signal(false);
 
   constructor() {
   }
@@ -40,19 +48,22 @@ export class ReviewComponent implements OnInit {
   }
 
   protected onNext(cardId: number, success: boolean): void {
-    if (this.finished()) {
+    this.toggleCardBackVisible();
+    this.currentCardIndex.set(this.currentCardIndex() + 1);
+
+    if (this.isFinished()) {
       this.router.navigate(["/deck", this.deckId()]);
     }
 
-    this.currentCardIndex.set(this.currentCardIndex() + 1);
     const request: ReviewCreateRequest = { success };
     this.cardService.createReview(cardId, request).subscribe({
-      next: (response: void) => {
-      },
-      error: (error) => {
-        console.log(error)
-      }
+      next: (response) => console.log("Logged review"),
+      error: (error) => console.log(error)
     });
+  }
+
+  protected toggleCardBackVisible(): void {
+    this.cardBackVisible() ? this.cardBackVisible.set(false) : this.cardBackVisible.set(true);
   }
 
   // Helper methods
@@ -73,7 +84,7 @@ export class ReviewComponent implements OnInit {
     return this.deckService.getCardsDue(this.deckId()!);
   }
 
-  private finished(): boolean {
-    return this.currentCardIndex() >= this.cardDetailsDue.length;
+  protected isFinished(): boolean {
+    return this.currentCardIndex() >= this.cardDetailsDue()!.length;
   }
 }

@@ -1,11 +1,22 @@
 <!--Navbar-->
 <app-navbar></app-navbar>
 
+<!--<p style="color: #FF6B00">Primary: Oranje, levendig, voor knoppen, links, highlights</p>-->
+<!--<p style="color: #4D79FF">Secondary: Koel blauw, goed contrast met oranje, voor secundaire knoppen of links</p>-->
+<!--<p style="color: #FFC75F">Tertiary: Lichtere oranje/amber, voor badges, hover states of accent</p>-->
+
 <!--Application-->
-<div class="row">
-	<div class="col-1 bg-body-secondary">left</div>
+<div class="row application-body">
+	<div class="col-1 side"></div>
 	<div class="col-10">
 		<router-outlet></router-outlet>
 	</div>
-	<div class="col-1 bg-body-secondary">right</div>
+	<div class="col-1 side"></div>
+</div>
+<div class="footer">
+	<footer class="text-center text-muted p-5">
+		&copy; 2025 Flashy App. All rights reserved.
+		Flashy App is designed to help users efficiently organize and review learning materials.
+		Our mission is to provide a simple, intuitive, and reliable platform for tracking progress and enhancing knowledge retention. .
+	</footer>
 </div>

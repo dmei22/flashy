@@ -45,8 +45,8 @@ export class DeckService {
   }
 
   // UPDATE
-  public updateDeck(request: DeckUpdateRequest): Observable<DeckDetails> {
-      return this.http.put<DeckDetails>(`${this.requestMapping}`, request).pipe(
+  public updateDeck(deckId: number, request: DeckUpdateRequest): Observable<DeckDetails> {
+      return this.http.put<DeckDetails>(`${this.requestMapping}/${deckId}`, request).pipe(
           map((response: DeckDetails) => Object.assign(new DeckDetails(), response))
       );
   }

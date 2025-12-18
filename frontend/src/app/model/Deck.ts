@@ -6,6 +6,7 @@ export class DeckOverview {
     public name!: string
     public description!: string
     public imageVersion!: number
+    public cardsDue!: number
 
     constructor() {
     }

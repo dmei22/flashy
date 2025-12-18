@@ -1,10 +1,10 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {DeckService} from "../../../service/deck.service";
 import {RouterLink} from "@angular/router";
 import {DeckOverview} from "../../../model/Deck";
 import {DeckCreateComponent} from "../deck-create/deck-create.component";
-import {BreadcrumbComponent} from "../../breadcrumb/breadcrumb.component";
+import {BreadcrumbComponent} from "../../ui/breadcrumb/breadcrumb.component";
 import {ImageService} from "../../../service/image.service";
 
 @Component({
@@ -13,7 +13,8 @@ import {ImageService} from "../../../service/image.service";
         NgForOf,
         RouterLink,
         DeckCreateComponent,
-        BreadcrumbComponent
+        BreadcrumbComponent,
+        NgIf
     ],
   templateUrl: './deck-overview.component.html',
   styleUrl: './deck-overview.component.css'
